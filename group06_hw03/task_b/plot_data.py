@@ -3,12 +3,14 @@
 import csv
 import matplotlib.pyplot as plt
 
-
+# plots the precalculated values from aggregate_data.py that
+# where saved in aggregated_data.csv to save computation and time
 def main():
   data_rows = read_csv('./aggregated_data.csv')
   plot(data_rows)
 
 
+# Removes unplottable values like Nones and plots the datapoints in rss vs fdr plot
 def plot( data_rows ):
   # filter rows that dont have delivery rate or rss_median and count
   data_rows_filtered = filter(lambda x: x['rss_median'] is not None and x['delivery_rate'] is not None, data_rows)
@@ -35,7 +37,9 @@ def plot( data_rows ):
   plt.show()
 
   
-
+# reads data from a file that was produced by aggregate_data.py 
+# (to avoid heavy processing on none changeable data)
+# also formats the rows
 def read_csv( file_path ):
   data_rows = []
   with open(file_path, 'r') as csvfile:
@@ -45,6 +49,9 @@ def read_csv( file_path ):
   return map(lambda x: format_row(x), data_rows)
 
 
+# formats the data rows in a way, that empty strings become None
+# and numeric strings get parsed into floats or ints
+# return is a hash with the neede parameters
 def format_row( data_row ):
   link_value = data_row['link']
   channel_value = data_row['channel']
