@@ -51,7 +51,11 @@ def read_files( file_path_template ):
 
 
 # grabs only  the rss value which is index 4, string to int
+# filters out buggy time stamps 
+# see discussion
+# https://isis.tu-berlin.de/mod/forum/discuss.php?d=112736#p227141
 def format_data( data_rows ):
-  return map(lambda x: int(x[4]) if x[4] is not None else None, data_rows)
+  data_rows_filtered = filter(lambda x: int(x[0]) > 1230768000, data_rows)
+  return map(lambda x: int(x[4]) if x[4] is not None else None, data_rows_filtered)
 
 main()

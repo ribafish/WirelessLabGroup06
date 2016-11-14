@@ -51,18 +51,25 @@ def write_to_csv( data_rows ):
 def process_file( file_path ):
   # get rows and map only rss and mac sequence nr
   # assumption: dataset is sorted by timestamp
-  data_rows = map(lambda x: filter_data_row(x) ,read_file(file_path))
+  file_filtered = filter_data_rows( read_file(file_path) )
+  data_rows = map(lambda x: map_data_row(x) ,file_filtered)
 
   return {
     'delivery_rate': calculate_delivery_rate(data_rows),
     'rss_median': calculate_median(data_rows)
   }
   
+# filter buggs timestamps
+# see discussion:
+# https://isis.tu-berlin.de/mod/forum/discuss.php?d=112736#p227141
+def filter_data_rows( file_read ):
+  rows = map(lambda x: x.rstrip('\n').split(','), file_read)
+  #return filter(lambda x: int(x[0]) > 1230768000, rows)
+  return rows
 
 
 # helper function see process_file
-def filter_data_row( line ):
-  row = line.rstrip('\n').split(',')
+def map_data_row( row ):
   return { 'rss' : int(row[4]), 'seq' : int(row[7]) }
 
 
