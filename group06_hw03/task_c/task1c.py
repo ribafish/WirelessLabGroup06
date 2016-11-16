@@ -3,7 +3,7 @@ import csv
 import glob
 
 def main():
-    # plot_rss()
+    plot_rss()
     plot_delivery_rates()
 
 def plot_delivery_rates():
@@ -41,6 +41,7 @@ def plot_delivery_rates():
     plt.scatter(channels, rates)
     plt.xticks(channels)
     plt.show()
+    plt.close()
 
 
 
@@ -107,6 +108,7 @@ def plot_rss():
     plt.scatter(plotx, ploty)
     plt.xticks(plotx)
     plt.show()
+    plt.close()
 
 
 

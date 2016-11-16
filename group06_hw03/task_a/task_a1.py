@@ -46,9 +46,10 @@ def main():
     plt.title("Boxplots")
     fig = plt.figure(1)
     ax = fig.add_subplot(111)
-    ax.boxplot(data_to_plot)
+    ax.boxplot(data_to_plot, 1)
     ax.set_xticklabels(box_names)
     plt.xticks(rotation=45)
+    plt.ylabel("RSS")
     plt.show()
 
 
@@ -112,7 +113,7 @@ def get_rss_from_file(file):
 
 def plot_moving_avg(combination):
     plt.close()
-    plt.title(combination.name + "SMA")
+    plt.title("RSS Moving average (16) " + combination.name)
     plt.xlabel("RSS")
     plt.plot(sma(combination.rss, 16), label="SMA")
     plt.savefig("sma-l%ic%i.png" % (combination.link, combination.channel))
