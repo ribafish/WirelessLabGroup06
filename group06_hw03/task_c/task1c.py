@@ -30,6 +30,7 @@ def plot_delivery_rates():
     plt.ylabel("Delivery ratio")
     plt.scatter(links, rates)
     plt.xticks(links)
+    plt.grid(True)
 
     plt.show()
 
@@ -40,28 +41,10 @@ def plot_delivery_rates():
     plt.ylabel("Delivery ratio")
     plt.scatter(channels, rates)
     plt.xticks(channels)
+    plt.grid(True)
     plt.show()
     plt.close()
 
-
-
-
-def get_ratios_from_file(file):
-    link = 0
-    channel = 0
-    ratios = []
-
-    with open(file, newline="\n") as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        for row in reader:
-            try:
-                data.rss.append(int(row[4]))
-            except Exception:
-                pass
-
-    csvfile.close()
-    # print(data.rss)
-    return link, channel, ratios
 
 def plot_rss():
     file_paths = glob.glob("../802_11a/link-*-channel-*.csv")
@@ -91,7 +74,7 @@ def plot_rss():
     plt.ylabel("RSS")
     plt.scatter(links_plotx, links_ploty)
     plt.xticks(links_plotx)
-
+    plt.grid(True)
     plt.show()
 
     plt.close()
@@ -107,6 +90,7 @@ def plot_rss():
     plt.ylabel("RSS")
     plt.scatter(plotx, ploty)
     plt.xticks(plotx)
+    plt.grid(True)
     plt.show()
     plt.close()
 
@@ -122,10 +106,11 @@ def get_rss_from_file(file):
     with open(file, newline="\n") as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for row in reader:
-            try:
-                rss.append(int(row[4]))
-            except Exception:
-                pass
+            if int(row[0]) > 1230768000:
+                try:
+                    rss.append(int(row[4]))
+                except Exception:
+                    pass
 
     csvfile.close()
     return link, channel, rss
