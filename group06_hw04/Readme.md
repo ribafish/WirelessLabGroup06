@@ -2,6 +2,8 @@
 
 ## Question 1:
 
+### Useful commands, not tied to specific point in question.
+
 * `ip link show`: Shows interfaces, replacement command for `ifconfig -a`. 
 At the beginning all Wifi interfaces all down (both nodes)
 
