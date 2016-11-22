@@ -25,17 +25,18 @@ So, both nodrs have the `ath5k`radio mapped to phy0 and Node 6 has `ath9k` radio
 SSID: group06_ap
 
 #### wireless
-`uci set wireless.default_radio1.ssid="group06_ap"`
+`uci set wireless.default_radio0.ssid="group06_ap"`
 
-`uci set wireless.default_radio1.network=wlan1`
+`uci set wireless.default_radio0.network=wlan0`
 
-`uci set wireless.default_radio1.ifname=wlan1`
+`uci set wireless.default_radio0.ifname=wlan0`
 
-`uci set wireless.radio1.disabled=0`
+`uci set wireless.radio0.disabled=0`
 
 `uci commit`
 
 #### Eventual config wireless
+
 ```
 
 config wifi-device 'radio0'
@@ -43,14 +44,15 @@ config wifi-device 'radio0'
         option channel '11'
         option hwmode '11g'
         option path 'pci0000:00/0000:00:0c.0'
-        option disabled '1'
+        option disabled '0'
 
 config wifi-iface 'default_radio0'
         option device 'radio0'
-        option network 'lan'
         option mode 'ap'
-        option ssid 'LEDE'
         option encryption 'none'
+        option ssid 'group06_ap'
+        option network 'wlan0'
+        option ifname 'wlan0'
 
 config wifi-device 'radio1'
         option type 'mac80211'
@@ -58,28 +60,27 @@ config wifi-device 'radio1'
         option hwmode '11g'
         option path 'pci0000:00/0000:00:0e.0'
         option htmode 'HT20'
-        option disabled '0'
+        option disabled '1'
 
 config wifi-iface 'default_radio1'
         option device 'radio1'
+        option network 'lan'
         option mode 'ap'
+        option ssid 'LEDE'
         option encryption 'none'
-        option ssid 'group06_ap'
-        option network 'wlan1'
-        option ifname 'wlan1'
 ```
 
 #### network
 
-`uci set network.wlan1=interface`
+`uci set network.wlan0=interface`
 
-`uci set network.wlan1.ipaddr="172.17.5.10"`
+`uci set network.wlan0.ipaddr="172.17.5.10"`
 
-`uci set network.wlan1.netmask="255.255.255.0"`
+`uci set network.wlan0.netmask="255.255.255.0"`
 
-`uci set network.wlan1.proto="static"`
+`uci set network.wlan0.proto="static"`
 
-`uci set network.wlan1.dns="172.17.255.254"`
+`uci set network.wlan0.dns="172.17.255.254"`
 
 `uci commit`
 
@@ -98,8 +99,8 @@ config interface 'lan'
         option ifname 'eth0'
         option proto 'dhcp'
 
-config interface 'wlan1'
-        option ifname 'wlan1'
+config interface 'wlan0'
+        option ifname 'wlan0'
         option ipaddr '172.17.5.10'
         option netmask '255.255.255.0'
         option proto 'static'
@@ -108,7 +109,7 @@ config interface 'wlan1'
 ```
 
 #### Check for success
-`iw wlan1 scan | grep 'SSID' | sort -u | awk '{print $2}'`
+`iw wlan0 scan | grep 'SSID' | sort -u | awk '{print $2}'`
 
 Output:
 
