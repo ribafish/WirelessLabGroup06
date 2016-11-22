@@ -82,7 +82,11 @@ config wifi-iface 'default_radio1'
 
 `uci set network.wlan0.dns="172.17.255.254"`
 
+`uci set network.wlan0.ifname="wlan0"`
+
 `uci commit`
+
+`wifi`
 
 #### Eventual config network
 
@@ -127,5 +131,88 @@ group07
 
 ### Setup group15 node as STA (wlan0)
 
+#### wireless
+
+`uci set wireless.radio0.path='pci0000:00/0000:00:0e.0'`
+
+`uci set wireless.radio0.disabled=0`
+
+`uci set wireless.default_radio0.network=wlan0`
+
+`uci set wireless.default_radio0.mode="sta"`
+
+`uci set wireless.default_radio0.ssid="group06_ap"`
+
+`uci commit`
 
 
+#### Eventual config wireless
+
+```
+
+config wifi-device 'radio0'
+        option type 'mac80211'
+        option channel '11'
+        option hwmode '11g'
+        option path 'pci0000:00/0000:00:0c.0'
+        option disabled '0'
+
+config wifi-iface 'default_radio0'
+        option device 'radio0'
+        option encryption 'none'
+        option network 'wlan0'
+        option mode 'sta'
+        option ssid 'node15'
+
+config wifi-device 'radio1'
+        option type 'mac80211'
+        option channel '11'
+        option hwmode '11g'
+        option path 'pci0000:00/0000:00:0e.0'
+        option disabled '1'
+
+config wifi-iface 'default_radio1'
+        option device 'radio1'
+        option network 'lan'
+        option mode 'ap'
+        option ssid 'LEDE'
+        option encryption 'none'
+```
+#### network
+
+`uci set network.wlan0=interface`
+
+`uci set network.wlan0.ipaddr="172.17.5.11"`
+
+`uci set network.wlan0.netmask="255.255.255.0"`
+
+`uci set network.wlan0.proto="static"`
+
+`uci set network.wlan0.dns="172.17.255.254"`
+
+`uci commit`
+
+`wifi`
+
+#### Eventual config for network
+
+```
+
+config interface 'loopback'
+        option ifname 'lo'
+        option proto 'static'
+        option ipaddr '127.0.0.1'
+        option netmask '255.0.0.0'
+
+config interface 'lan'
+        option type 'bridge'
+        option ifname 'eth0'
+        option proto 'dhcp'
+
+config interface 'wlan0'
+        option ipaddr '172.17.5.11'
+        option netmask '255.255.255.0'
+        option proto 'static'
+        option dns '172.17.255.254'
+
+```
