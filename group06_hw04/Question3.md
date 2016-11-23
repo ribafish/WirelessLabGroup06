@@ -97,6 +97,14 @@
 	
 	NP15 tr : `iw wlan0 link | grep rate` Output: tx bitrate: 6.0 MBit/s
 	
+13. TP: 0 dBm, TR: 6mbit/s
+
+	NP15 iperf cmd: `iperf -c 172.17.5.10 -u -b 7M -t 30 -l 1024`
+ 
+ 	NP15 tx pwr: `iw wlan0 info | grep txpower` Output: txpower 0.00 dBm
+ 	
+ 	NP15 tr : `iw wlan0 link | grep rate` Output: tx bitrate: 6.0 MBit/s
+	
 
 ### b)
 	
