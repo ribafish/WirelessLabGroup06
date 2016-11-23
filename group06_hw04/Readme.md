@@ -4,6 +4,8 @@
 
 * [Question 2](Question2.md)
 
+* [Question 3](Question3.md)
+
 
 ### Useful commands, not tied to specific point in question.
 
@@ -21,6 +23,8 @@ So, both nodrs have the `ath5k`radio mapped to phy0 and Node 6 has `ath9k` radio
 	* `cnode15` will connect you over ip/ssh to node **15**
 
 * on both nodes in the folder `/etc/config/` configs are backed up under `/etc/config/<filename>.bak` 
+
+* `iwinfo` command to siplay wireless info quickly
 
 
 
