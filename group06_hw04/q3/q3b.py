@@ -2,6 +2,7 @@
 
 import re
 import subprocess as sub
+import numpy as np
 import sys, getopt
 import matplotlib.pyplot as plt
 import glob
@@ -30,7 +31,7 @@ def main(argv):
     iperf_paths = glob.glob("%s*.out"%folder)
     iperf_paths.sort()
     plot_throughput(iperf_paths)
-    
+
     tcpdump_paths = glob.glob("%s*.cap"%folder)
     tcpdump_paths.sort()
     plot_rss(tcpdump_paths)
@@ -86,7 +87,7 @@ def plot_throughput(filepaths):
         mins.append(s.min())
         maxs.append(s.max())
 
-    x_range = range( int(min(mins)), int(max(maxs))+1)
+    x_range = np.linspace(min(mins)-1.0, max(maxs)+1.0, 200)
 
     # Plotting
 
@@ -105,7 +106,7 @@ def plot_throughput(filepaths):
     plt.title("ECDF of throughput")
     plt.ylabel("ECDF")
     plt.xlabel("Throughput [Mbit/sec]")
-    plt.legend(loc=4)
+    plt.legend(loc=2)
     plt.grid(True)
     plt.savefig("throughput_ECDF.png")
     plt.close()
@@ -141,7 +142,7 @@ def plot_rss(filepaths):
         for l in lines:
             try:
                 rssdb = next(x for x in l.split(" ") if "dB" in x)  # this finds and returns the first dB value
-                rss = int(rssdb[:len(rssdb)-2])                     # this parses the "dB" out and leaves the int
+                rss = float(rssdb[:len(rssdb)-2])                     # this parses the "dB" out and leaves the int
                 rssis.append(rss)
             except StopIteration:
                 None
@@ -151,11 +152,11 @@ def plot_rss(filepaths):
         mins.append(s.min())
         maxs.append(s.max())
 
-    x_range = range( min(mins), max(maxs))
+        x_range = np.linspace(min(mins) - 1.0, max(maxs) + 1.0, 200)
 
     # Plotting
 
-    plt.figure(figsize=(12, 9))
+    plt.figure(figsize=(12, 8))
 
     for s in scenarios:
         box_datas.append(s.data)
