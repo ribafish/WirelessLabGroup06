@@ -123,7 +123,7 @@ def plot_rss(filepaths):
     box_names = []
 
     for filepath in filepaths:
-        tcpdump_call = ('tcpdump -l -K -n -r %s' % filepath).split(" ")
+        tcpdump_call = ('tcpdump -l -K -n -r %s src 172.17.5.11' % filepath).split(" ")
         lines = sub.check_output(tcpdump_call, universal_newlines=True).split('\n')
         name_parts = re.split('\.|\-', filepath.split()[len(filepath.split()) - 1])
         power = int(name_parts[1])
