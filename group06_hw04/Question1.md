@@ -200,6 +200,8 @@ config interface 'wlan0'
 ### Setup Node 06 as monitor on ath9k (wlan1)
 #### Confirming that radio1 is ath9k card:
 1. /etc/config/wireless radio1 definition:
+
+
 ```
 config wifi-device 'radio1'
         option type 'mac80211'
@@ -208,7 +210,10 @@ config wifi-device 'radio1'
         option path 'pci0000:00/0000:00:0e.0'
         option disabled '0'
 ```
-2. check the `path 'pci0000:00/0000:00:0e.0'`, which states that radio1 is using the device /sys/devices/pci0000:00/0000:00:0e.0. This device has the driver defined as: 
+ 
+2. check the `path 'pci0000:00/0000:00:0e.0'`, 
+
+which states that radio1 is using the device /sys/devices/pci0000:00/0000:00:0e.0. This device has the driver defined as: 
 ```
 driver -> ../../../bus/pci/drivers/ath9k/
 ```
@@ -217,7 +222,9 @@ driver -> ../../../bus/pci/drivers/ath9k/
 
 `uci set wireless.radio1.disabled=0`
 
-`uci set wireless.radio1.htmode=NONE` <-  `NONE` disables 802.11n rates and enforce the usage of legacy 802.11 b/g/a rates. We set this because the ath5k cards support 802.11a/b/g ONLY
+`uci set wireless.radio1.htmode=NONE` <-  `NONE` 
+
+disables 802.11n rates and enforce the usage of legacy 802.11 b/g/a rates. We set this because the ath5k cards support 802.11a/b/g ONLY
 
 `uci set wireless.default_radio1.mode=monitor`
 
@@ -233,6 +240,7 @@ driver -> ../../../bus/pci/drivers/ath9k/
 
 #### Monitor interface confirmation:
 * Command `iw wlan1 info` output:
+
 ```
 Interface wlan1
         ifindex 19
@@ -246,6 +254,7 @@ Interface wlan1
 ```
 
 * tcpdump works, command: `tcpdump -i wlan1 -c 10`, output:
+
 ```
 tcpdump: WARNING: wlan1: no IPv4 address assigned
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
@@ -264,6 +273,7 @@ listening on wlan1, link-type IEEE802_11_RADIO (802.11 plus radiotap header), ca
 131 packets received by filter
 0 packets dropped by kernel
 ```
+
 
 ### Eventual config for wireless:
 ```

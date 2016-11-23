@@ -57,60 +57,111 @@
  *all traces are saved at ~/hw04/q2a/ on ST*
  
 
+**Networks**
+
+---
+
+* Beacons on CH1:
+
+	`tcpdump -r channel1.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+	
+	Output: 
+	
+	```
+	Group01
+	LEDE
+	TUB-Guest
+	TUB-intern
+	WirelessLab-Group04
+	eduroam
+	group06_ap
+	```
+
+* Beacons on CH6:
+
+	`tcpdump -r channel6.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+	
+	Output: 
+	
+	```
+	Group01
+	LEDE
+	TUB-Guest
+	TUB-intern
+	WirelessLab-Group04
+	eduroam
+	group06_ap
+	```
+
+* Beacons on CH11:
+
+	`tcpdump -r channel11.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+	
+	Output: 
+	
+	```
+	FGINET
+	Group01
+	Group03
+	LEDE
+	MMS-TECHNIK
+	TUB-Guest
+	TUB-intern
+	WirelessLab-Group04
+	eduroam
+	foobar
+	group002
+	group06_ap
+	```
+
+* Alternatively getting networks:
+
+	N15: `iw wlan0 scan` 
+	
+	Output not included because to big
+ 
+
 ### b)
 
-Beacons on CH1:
+#### Beacon Frame (Management Frame, Subtype 8)
 
-`tcpdump -r channel1.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+Beacon frames are emitted by Access Points (or STA in IBSS) to advertise 
+the APs service with its characteristics. This mechanism is not only
+useful for already connected STAs but also for associated STA (Periodic
+Frames that hold information like RSS, etc). Discovering networks listening
+to beacons is called passive scanning
 
-Output: 
 
-```
-Group01
-LEDE
-TUB-Guest
-TUB-intern
-WirelessLab-Group04
-eduroam
-group06_ap
-```
+![](./q2/beacon.png)
+*Example Beacon Frame from the trace of CH1*
 
-Beacons on CH6:
+#### Probe Request (Management Frame, Subtype 4)
 
-`tcpdump -r channel6.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+A Probe request is sent by a STA to ask for networks. This happens on 
+every channel. An AP that is available for associating will reply 
+with a probe response.
+Discovering networks by emitting probe request and awaiting response
+is called active scanning
 
-Output: 
 
-```
-Group01
-LEDE
-TUB-Guest
-TUB-intern
-WirelessLab-Group04
-eduroam
-group06_ap
-```
+![](./q2/proberequest.png)
+*Example Probe Request Frame from the trace of CH1*
+	
+#### Differences of the two above frames
 
-Beacons on CH11:
+* SSID parameter set
 
-`tcpdump -r channel11.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+	Usually this parameter is set to "0" (Broadcast) in Probe Request to address
+	every APs whereas in Beacons the sending AP's SSID is supplied.
+	
+* The Beacon has additional fields like HT Capabilities, Country Information or
+Vendor Specific tags. Those Parameters would be sent as Probe Response of the Probe Request.
 
-Output: 
+### c)
 
-```
-FGINET
-Group01
-Group03
-LEDE
-MMS-TECHNIK
-TUB-Guest
-TUB-intern
-WirelessLab-Group04
-eduroam
-foobar
-group002
-group06_ap
-```
-
-  
-
+The extended support rate tag is, as the name implies an extensions to the support
+rates tag. Per definition one flag has 8 octes of data it can hold. One octet for
+every supported rate. But since IEEE 802.11g there are more than 8 supported rates.
+That is why simply another tag was added to hold all possible values.
+When all rates fit into the Supported Rates field it must not actively add
+the extended support rates field.
