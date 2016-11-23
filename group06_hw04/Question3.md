@@ -112,5 +112,23 @@
 ![Image of Throughput ECDF](https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw04/q3/throughput_ECDF.png)
 ![Image of Throughput boxplot](https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw04/q3/throughput_box.png)
 
+* Medians:
+
+```
+54Mbit/s@0dBm: median = 5.013333Mbit/s
+6Mbit/s@0dBm: median = 3.360000Mbit/s
+54Mbit/s@11dBm: median = 6.093333Mbit/s
+6Mbit/s@11dBm: median = 4.186667Mbit/s
+```
+
+```
+54Mbit/s@0dBm: median = -25dBm
+6Mbit/s@0dBm: median = -65dBm
+54Mbit/s@11dBm: median = -25dBm
+6Mbit/s@11dBm: median = -26dBm
+```
+
+* From RSS plots we can conclude that there was some kind of interference when capturing scenario 2 (6Mbit/s, 0dBm), which produced so much readings at -65dBm to push the median to -65dBm, as opposed to other scenario medians, which are around -25dBm. We see no other reason for this scenario to be that much worse than the others. Although it is true that with wour settings (7Mbit/s on 6Mbit/s medium and 56Mbit/s on 54Mbit/s medium) this is expected to be the worst run, as it's at the lower power and 17% oversaturated we don't think this would give such a drastic difference when looking at RSS value. 
+
 	
 	
