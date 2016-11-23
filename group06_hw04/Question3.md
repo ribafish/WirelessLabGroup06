@@ -1,5 +1,7 @@
 ## Question 3:
+
 (ST = Stepping Stone, N6 = Node 6, N15 Node 15)
+
 ### a)
 
 1. Check that all interfaces are on the same channel
@@ -35,22 +37,22 @@
 	Output: tx bitrate:	6.0 MBit/s
 	
 
-4. iperf server command:
+4. iperf server command (N6):
 	
 	`iperf -s -u`
 	
 	* -s = server mode
 	* -u = udp packets
 
-5. start nc on ST
+5. start nc  (ST)
 
 	`nc -l -p 8080 > channel11-<tp>-<tr>.cap`
 
-6. tcpdump on node6
+6. tcpdump on N6
 
 	`tcpdump -i wlan1 -w- | nc 172.17.3.1 8080`
 	
-7. iperf client command:
+7. iperf client command (N15):
 
 	```
 	for i in `seq 12`; do 
@@ -65,9 +67,9 @@
 	* -b = bandwidth #
 	* -t = test interval #
 	* -l = upd packet size #
-	* sleep 2s, wait for connection to be closed and set up again
+	* sleep 2s, wait for connection to be closed
 
-8. Copy Iperf Server output to `iperf-<tp>-<tr>.out`
+8. Copy iperf Server output to `iperf-<tp>-<tr>.out`
 
 9. Repeat Step 3, 5, 6, 7, 8 for remaining values
 
@@ -75,7 +77,7 @@
 
 	NP15 iperf cmd: `iperf -c 172.17.5.10 -u -b 56M -t 30 -l 1024`
  
- 	NP15 tx pwr: `iw wlan0 info | grep txpower` Output: txpower 0.00 dBm [..]
+ 	NP15 tx pwr: `iw wlan0 info | grep txpower` Output: txpower 0.00 dBm
  	
  	NP15 tr : `iw wlan0 link | grep rate` Output: tx bitrate: 54.0 MBit/s
  	
@@ -94,5 +96,8 @@
 	NP15 tx pwr: `iw wlan0 info | grep txpower` Output: txpower 11.00 dBm
 	
 	NP15 tr : `iw wlan0 link | grep rate` Output: tx bitrate: 6.0 MBit/s
+	
+
+### b)
 	
 	
