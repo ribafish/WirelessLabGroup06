@@ -27,8 +27,13 @@ def main(argv):
     elif folder[len(folder)-1] != "/":
         folder = folder + "/"
 
-    plot_throughput(glob.glob("%s*.out"%folder))
-    plot_rss(glob.glob("%s*.cap"%folder))
+    iperf_paths = glob.glob("%s*.out"%folder)
+    iperf_paths.sort()
+    plot_throughput(iperf_paths)
+    
+    tcpdump_paths = glob.glob("%s*.cap"%folder)
+    tcpdump_paths.sort()
+    plot_rss(tcpdump_paths)
 
 class Scenario(object):
     name = ""
@@ -39,7 +44,7 @@ class Scenario(object):
     def __init__(self, power, rate, data):
         self.power = power
         self.rate = rate
-        self.name = "Power %i dBm rate %i Mbit/s"%(power, rate)
+        self.name = "%iMbit/s@%idBm"%(rate, power)
         self.data = data
 
     def min(self):
@@ -69,7 +74,6 @@ def plot_throughput(filepaths):
         rate = int(name_parts[2])
         throughputs = []
 
-        # for l in lines:
         for i in range(len(lines)):
             if i > 6 and i%2==1:
                 l = lines[i]
@@ -84,6 +88,10 @@ def plot_throughput(filepaths):
 
     x_range = range( int(min(mins)), int(max(maxs))+1)
 
+    # Plotting
+
+    plt.figure(figsize=(12, 8))
+
     for s in scenarios:
         box_datas.append(s.data)
         box_names.append(s.name)
@@ -92,21 +100,22 @@ def plot_throughput(filepaths):
 
         plt.step(x_range, y, label=s.name)
 
+
     plt.axis([min(mins), max(maxs), -0.1, 1.1])
     plt.title("ECDF of throughput")
-    plt.ylabel("ECDF(throughput)")
+    plt.ylabel("ECDF")
     plt.xlabel("Throughput [Mbit/sec]")
     plt.legend(loc=4)
     plt.grid(True)
     plt.savefig("throughput_ECDF.png")
     plt.close()
 
+    fig = plt.figure(1, figsize=(12, 8))
     plt.title("Throughput Boxplots")
-    fig = plt.figure(1)
     ax = fig.add_subplot(111)
     ax.boxplot(box_datas, 1)
     ax.set_xticklabels(box_names)
-    plt.ylabel("RSS")
+    plt.ylabel("Throughput [Mbit/s]")
     plt.grid(True)
     plt.savefig("throughput_box.png")
     plt.close()
@@ -144,6 +153,10 @@ def plot_rss(filepaths):
 
     x_range = range( min(mins), max(maxs))
 
+    # Plotting
+
+    plt.figure(figsize=(12, 9))
+
     for s in scenarios:
         box_datas.append(s.data)
         box_names.append(s.name)
@@ -154,15 +167,15 @@ def plot_rss(filepaths):
 
     plt.axis([min(mins), max(maxs), -0.1, 1.1])
     plt.title("ECDF of RSSs")
-    plt.ylabel("ECDF(RSS)")
+    plt.ylabel("ECDF")
     plt.xlabel("RSS [dB]")
     plt.legend(loc=4)
     plt.grid(True)
     plt.savefig("rss_ECDF.png")
     plt.close()
 
+    fig = plt.figure(1, figsize=(12, 8))
     plt.title("RSS Boxplots")
-    fig = plt.figure(1)
     ax = fig.add_subplot(111)
     ax.boxplot(box_datas, 1)
     ax.set_xticklabels(box_names)
