@@ -107,5 +107,10 @@
 	
 
 ### b)
+![Image of RSS ECDF](https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw04/q3/rss_ECDF.png)
+![Image of RSS boxplot](https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw04/q3/rss_box.png)
+![Image of Throughput ECDF](https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw04/q3/throughput_ECDF.png)
+![Image of Throughput boxplot](https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw04/q3/throughput_box.png)
+
 	
 	
