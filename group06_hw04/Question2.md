@@ -14,7 +14,7 @@
 
     `uci commit`
 
-    `reboot` -> `wifi` and `/etc/init.d/network restart` do not change channel, don't know the reason
+    `reboot` -> `wifi`, `wifi down && wifi up` and `/etc/init.d/network restart` do not change channel, don't know the reason
     
     `iw wlan1 info` to check wlan1 monitoring interface status
 
