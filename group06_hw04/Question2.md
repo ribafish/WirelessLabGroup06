@@ -1,38 +1,63 @@
-# WirelessLab, Homework 04
-
-* [Back to Readme.md](Readme.md)
-
 ## Question 2:
 
 ### a)
 * Selected channels: 1, 6, 11 (should be most used ones)
 * Wireless setup:
   
-  * Channel setup: 
-  
-    `uci set wireless.radio1.channel=1` (or 6 or 11)
-
-    `uci commit`
-
-    `reboot` -> `wifi`, `wifi down && wifi up` and `/etc/init.d/network restart` do not change channel, don't know the reason
-    
+  * Channel setup:  
+    `iw wlan1 set channel <cnumber>`    
     `iw wlan1 info` to check wlan1 monitoring interface status
 
-* Logging command: We decided to stop logging after 5min because of space constraints -> 
-nc on SteppingStone doesn't accept incoming connections, all ports are closed
+* Logging command: We decided to stop logging after 5min (ST = Stepping Stone, N6 = Node 6)
+	* **Channel 1**
+		
+		ST: `nc -l -p 8080 > channel1.cap`
+		
+		N6: `iw wlan1 set channel 1`
+		
+		N6: `iw wlan1 info | grep channel`
+		
+		Output: channel 1 (2412 MHz), width: 20 MHz (no HT), center1: 2412 MHz
+		
+		N6: `tcpdump -i wlan1 -G 300 -w- | nc 172.17.3.1 8080`
+		
+		
+	* **Channel 6**
+		
+		ST: `nc -l -p 8080 > channel6.cap`
+		
+		N6: `iw wlan1 set channel 6`
+		
+		N6: `iw wlan1 info | grep channel`
+		
+		Output: channel 6 (2437 MHz), width: 20 MHz (no HT), center1: 2437 MHz
+		
+		N6: `tcpdump -i wlan1 -G 300 -w- | nc 172.17.3.1 8080`
+		
 
-  `tcpdump -i wlan1 -G 300 -W 1 -w channel1.cap` (and channel6.cap and channel11.cap)
+	* **Channel 11**
+		
+		ST: `nc -l -p 8080 > channel11.cap`
+		
+		N6: `iw wlan1 set channel 11`
+		
+		N6: `iw wlan1 info | grep channel`
+		
+		Output: channel 11 (2462 MHz), width: 20 MHz (no HT), center1: 2462 MHz
+		
+		N6: `tcpdump -i wlan1 -G 300 -w- | nc 172.17.3.1 8080`
+		
 
-    `-i wlan1` sets it to listen on interface 1
+**tcpdump flags explained:**
+ 
+ * `-i wlan1` sets it to listen on interface 1 (Monitor)
+      
+ * `-G 300` sets it to listen for 300s or 5min
+   
+ *all traces are saved at ~/hw04/q2a/ on ST*
+ 
+ 
   
-    `-G 300` sets it to listen for 300s
-  
-    `-W 1` sets the maximum files to be written to 1
-  
-    `-w filename` sets the file to which output is written
-  
-  all traces are saved at ~/hw04/q1a/ on SteppingStone
-  
-## Currently only trace for channel 1 as I can't get the damned thing to switch channels although it is written in the file and I've tried all the commands to reset the config or reboot node.
+
   
 
