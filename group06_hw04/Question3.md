@@ -44,7 +44,7 @@
 
 5. start nc on ST
 
-	`nc -l -p 8080 > channel1-<tp>-<tr>.cap`
+	`nc -l -p 8080 > channel11-<tp>-<tr>.cap`
 
 6. tcpdump on node6
 
@@ -83,8 +83,16 @@
 
 	NP15 iperf cmd: `iperf -c 172.17.5.10 -u -b 56M -t 30 -l 1024`
 	
-	NP15 tx pwr: `iw wlan0 info | grep txpower` Output: txpower 20.00 dBm
+	NP15 tx pwr: `iw wlan0 info | grep txpower` Output: txpower 11.00 dBm
 	
 	NP15 tr : `iw wlan0 link | grep rate` Output: tx bitrate: 54.0 MBit/s
 	
-	*Couldn't set it to exactly 11dBm, tried a 100 times, 100 ways*
+12. TP: 11dBm, TR: 6mbit/s
+
+	NP15 iperf cmd: `iperf -c 172.17.5.10 -u -b 7M -t 30 -l 1024`
+	
+	NP15 tx pwr: `iw wlan0 info | grep txpower` Output: txpower 11.00 dBm
+	
+	NP15 tr : `iw wlan0 link | grep rate` Output: tx bitrate: 6.0 MBit/s
+	
+	

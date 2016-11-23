@@ -56,8 +56,61 @@
    
  *all traces are saved at ~/hw04/q2a/ on ST*
  
- 
-  
+
+### b)
+
+Beacons on CH1:
+
+`tcpdump -r channel1.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+
+Output: 
+
+```
+Group01
+LEDE
+TUB-Guest
+TUB-intern
+WirelessLab-Group04
+eduroam
+group06_ap
+```
+
+Beacons on CH6:
+
+`tcpdump -r channel6.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+
+Output: 
+
+```
+Group01
+LEDE
+TUB-Guest
+TUB-intern
+WirelessLab-Group04
+eduroam
+group06_ap
+```
+
+Beacons on CH11:
+
+`tcpdump -r channel11.cap | grep Beacon | awk '{print $14}' | sed "s/[()]//g" | sort -u`
+
+Output: 
+
+```
+FGINET
+Group01
+Group03
+LEDE
+MMS-TECHNIK
+TUB-Guest
+TUB-intern
+WirelessLab-Group04
+eduroam
+foobar
+group002
+group06_ap
+```
 
   
 
