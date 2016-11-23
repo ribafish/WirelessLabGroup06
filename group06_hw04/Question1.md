@@ -1,7 +1,3 @@
-# WirelessLab, Homework 04
-
-* [Back to Readme.md](Readme.md)
-
 ## Question 1:
 
 ### Setup group06 node as AP (wlan0)
@@ -301,4 +297,28 @@ config wifi-iface 'default_radio1'
         option hidden '1'
 ```
 
-* [Back to Readme.md](Readme.md)
+### Check inter-connectivity
+
+(ST = Stepping Stone, N6 = Node06, N15 = Node15)
+
+* get IPs for the nodes once more 
+	N6: `ifconfig wlan0 | grep 'inet addr' | awk '{print $2}'`
+	
+	Output: addr:**172.17.5.10**
+	
+	N15: `ifconfig wlan0 | grep 'inet addr' | awk '{print $2}'`
+	
+	Output: addr:**172.17.5.11**
+	
+* Check for reachability
+
+	N6: `ping 172.17.5.11`
+	
+	Output (trunc): 	64 bytes from 172.17.5.10: seq=1 ttl=64 time=0.188 ms
+	
+	N15: `ping 172.17.5.10`
+	
+	Output (trunc): 64 bytes from 172.17.5.10: seq=1 ttl=64 time=1.136 ms
+	
+
+**The Nodes are connected.**
