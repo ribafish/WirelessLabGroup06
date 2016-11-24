@@ -121,6 +121,11 @@ def plot_throughput(filepaths):
     plt.savefig("throughput_box.png")
     plt.close()
 
+    for s in scenarios:
+        print("%s: median = %fMbit/s" % (s.name, median(s.data)))
+    #     s.data.sort()
+    #     print("%s: CI = %f, %f" % (s.name, s.data[2], s.data[9]))
+
 
 def plot_rss(filepaths):
     if len(filepaths) == 0:
@@ -185,12 +190,20 @@ def plot_rss(filepaths):
     plt.savefig("rss_box.png")
     plt.close()
 
+    for s in scenarios:
+        print("%s: median = %idBm"%(s.name, median(s.data)))
 
 
 
-
-
-
+def median(raw):
+    data = raw
+    data.sort()
+    x = 0.0
+    if len(data) % 2 == 1:
+        x = data[int(len(data)/2)]
+    else:
+        x = ( data[int(len(data)/2)] + data[int(len(data)/2 + 1)] )/2.0
+    return x
 
 
 
