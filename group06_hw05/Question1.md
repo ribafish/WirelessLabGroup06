@@ -3,7 +3,7 @@
 ### Useful links:
 * [`iw` command](https://wireless.wiki.kernel.org/en/users/Documentation/iw)
 * [about antenna options](https://sourceforge.net/p/android-x86/kernel/ci/604eeadd1880bddfb155369491cc13fb8d3f9df6/)
-* 
+* [ini.h file - gitlab](https://gitlab.denx.de/marex/linux-denx/blob/b1cdc4670b9508fcd47a15fbd12f70d269880b37/drivers/net/wireless/ath/ath5k/ani.h)
 
 ### Setup:
   1. Disable ANI on both `ath5k` cards: **NOTE: if nodes loose connection the ani settings will reset**
