@@ -78,13 +78,7 @@
   
   9. Start tcpdump piped to nc on Node 6
   
-  ```
-  All Packets:
-      tcpdump -i wlan1 -w- | nc 172.17.3.1 8080
-  
-  Just our packets (node15 > node6):
-      tcpdump -i wlan1 src 172.17.5.11 -w- | nc 172.17.3.1 8080
-  ```
+  `tcpdump -i wlan1 -w- | nc 172.17.3.1 8080`
   
   10. Iperf command on Node 15
   
