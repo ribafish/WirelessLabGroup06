@@ -63,10 +63,18 @@
     
     ```
     iw dev wlan0 set txpower fixed 100    (100* mBm == 1 dBm)
+    ```
     
+  5. Check txpower, bitrate, antenna and ani settings:
+  
+    ```
     iw wlan0 info | grep txpower
     
     iw wlan0 station dump | grep 'tx bitrate'
+    
+    cat /sys/kernel/debug/ieee80211/phy0/ath5k/antenna
+    
+    cat /sys/kernel/debug/ieee80211/phy0/ath5k/ani | grep "operating\|OFDM\|CCK"
     ```
     
   6. Check that nodes are connected using ping or iperf
