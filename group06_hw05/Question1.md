@@ -59,11 +59,14 @@
     iw wlan0 set bitrates legacy-2.4 24
     ```
     
-  4. Check bitrate and tx power:
+  4. Set tx power and check it, check bitrate:
     
     ```
-    iw wlan0 station dump | grep 'tx bitrate'
+    iw dev wlan0 set txpower fixed 100    (set it to 100* dBm)
+    
     iw wlan0 info | grep txpower
+    
+    iw wlan0 station dump | grep 'tx bitrate'
     ```
     
   6. Check that nodes are connected using ping or iperf
