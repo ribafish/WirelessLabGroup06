@@ -74,7 +74,7 @@
     
     cat /sys/kernel/debug/ieee80211/phy0/ath5k/antenna
     
-    cat /sys/kernel/debug/ieee80211/phy0/ath5k/ani | grep "operating\|OFDM\|CCK"
+    cat /sys/kernel/debug/ieee80211/phy0/ath5k/ani | grep "operating\|OFDM\|CCK" | grep -v "errors"
     ```
     
   6. Check that nodes are connected using ping or iperf
