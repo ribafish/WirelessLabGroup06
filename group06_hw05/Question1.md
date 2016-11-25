@@ -21,20 +21,20 @@
     echo ani-on > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
     
     * set lowest sensitivity (=highest noise immunity):
-        echo sens-low > /sys/kernel/debug/ath5k/phy0/ani
+        echo sens-low > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
     * set highest sensitivity (=lowest noise immunity):
-        echo sens-high > /sys/kernel/debug/ath5k/phy0/ani
+        echo sens-high > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
     * automatically control immunity (default):
-        echo ani-on > /sys/kernel/debug/ath5k/phy0/ani
+        echo ani-on > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
     * Noise immunity level
-        echo noise-high > /sys/kernel/debug/ath5k/phy0/ani
-        echo noise-low > /sys/kernel/debug/ath5k/phy0/ani
+        echo noise-high > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
+        echo noise-low >/sys/kernel/debug/ieee80211/phy0/ath5k/ani
     * Control OFDM weak signal detection
-        echo ofdm-on > /sys/kernel/debug/ath5k/phy0/ani
-        echo ofdm-off > /sys/kernel/debug/ath5k/phy0/ani
+        echo ofdm-on > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
+        echo ofdm-off > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
     * Control CCK weak signal detection
-        echo cck-on > /sys/kernel/debug/ath5k/phy0/ani
-        echo cck-off > /sys/kernel/debug/ath5k/phy0/ani
+        echo cck-on > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
+        echo cck-off > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
     ```
   
   
@@ -47,10 +47,10 @@
     All options:
     
     ```
-    echo diversity > antenna: use default antenna mode (RX and TX diversity) - NOTE: this does not reset the antenna file to default value
-    echo fixed-a > antenna: use fixed antenna A for RX and TX
-    echo fixed-b > antenna: use fixed antenna B for RX and TX
-    echo clear > antenna: reset antenna statistics
+    echo diversity >  /sys/kernel/debug/ieee80211/phy0/ath5k/antenna     use default antenna mode (RX and TX diversity) - NOTE: this does not reset the antenna file to default value
+    echo fixed-a >  /sys/kernel/debug/ieee80211/phy0/ath5k/antenna       use fixed antenna A for RX and TX
+    echo fixed-b >  /sys/kernel/debug/ieee80211/phy0/ath5k/antenna       use fixed antenna B for RX and TX
+    echo clear >  /sys/kernel/debug/ieee80211/phy0/ath5k/antenna         reset antenna statistics
     ```
     
   3. Set modulation on both cards to 24 Mbps:
@@ -62,7 +62,7 @@
   4. Set tx power and check it, check bitrate:
     
     ```
-    iw dev wlan0 set txpower fixed 100    (set it to 100* dBm)
+    iw dev wlan0 set txpower fixed 100    (100* mBm == 1 dBm)
     
     iw wlan0 info | grep txpower
     
