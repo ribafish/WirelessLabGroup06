@@ -1,4 +1,4 @@
-# Question 1:
+# Question 1: Weak vs. strong signal detection
 
 ### Useful links:
 * [`iw` command](https://wireless.wiki.kernel.org/en/users/Documentation/iw)
