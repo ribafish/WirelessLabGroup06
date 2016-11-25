@@ -6,7 +6,7 @@
 * 
 
 ### Setup:
-  1. Disable ANI on both `ath5k` cards:
+  1. Disable ANI on both `ath5k` cards: **NOTE: if nodes loose connection the ani settings will reset**
   
     ```
     echo ani-off > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
@@ -27,14 +27,14 @@
     * automatically control immunity (default):
         echo ani-on > /sys/kernel/debug/ath5k/phy0/ani
     * Noise immunity level
-      echo noise-high > /sys/kernel/debug/ath5k/phy0/ani
-      echo noise-low > /sys/kernel/debug/ath5k/phy0/ani
+        echo noise-high > /sys/kernel/debug/ath5k/phy0/ani
+        echo noise-low > /sys/kernel/debug/ath5k/phy0/ani
     * Control OFDM weak signal detection
-      echo ofdm-on > /sys/kernel/debug/ath5k/phy0/ani
-      echo ofdm-off > /sys/kernel/debug/ath5k/phy0/ani
+        echo ofdm-on > /sys/kernel/debug/ath5k/phy0/ani
+        echo ofdm-off > /sys/kernel/debug/ath5k/phy0/ani
     * Control CCK weak signal detection
-      echo cck-on > /sys/kernel/debug/ath5k/phy0/ani
-      echo cck-off > /sys/kernel/debug/ath5k/phy0/ani
+        echo cck-on > /sys/kernel/debug/ath5k/phy0/ani
+        echo cck-off > /sys/kernel/debug/ath5k/phy0/ani
     ```
   
   
