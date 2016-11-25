@@ -26,6 +26,8 @@
         echo sens-high > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
     * automatically control immunity (default):
         echo ani-on > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
+        
+      --------------- These don't all work as expected ----------------
     * Noise immunity level
         echo noise-high > /sys/kernel/debug/ieee80211/phy0/ath5k/ani
         echo noise-low >/sys/kernel/debug/ieee80211/phy0/ath5k/ani
