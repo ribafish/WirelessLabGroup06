@@ -68,4 +68,23 @@
     
   6. Check that nodes are connected using ping or iperf
   
-  * To change `ofdm` and `cck` settings edit `/sys/kernel/debug/ieee80211/phy0/ath5k/ani` file.
+  7. Start iperf server on Node 6
+  
+  `iperf -s -u`
+  
+  8. Start nc on SteppingStone
+  
+  `nc -l -p 8080 > filename.cap`
+  
+  9. Start tcpdump piped to nc on Node 6
+  
+  `tcpdump -i wlan1 -w- | nc 172.17.3.1 8080`
+  
+  10. Iperf command on Node 15
+  
+  ```
+  for i in `seq 10`; do 
+      iperf -c 172.17.5.10 -u -b 25M -t 30 -l 1024
+      sleep 2s
+  done
+  ```
