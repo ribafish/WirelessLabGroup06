@@ -107,10 +107,12 @@
 ## Runs:
 1. Ani-off, cck-off, ofdm-off, Antenna-b, txpower 0dBm: `weak-off.cap`
 2. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm: `weak-on.cap`
-3. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, sens-high: `sens-high.cap`
-4. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, sens-low: `sens-low.cap`
+3. Ani-off, cck-off, ofdm-off, Antenna-b, txpower 30dBm: `weak-off-30dBm.cap`
+4. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 30dBm: `weak-on-30dBm.cap`
+5. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, sens-high: `sens-high.cap`
+6. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, sens-low: `sens-low.cap`
 
   * on sender node (node15) we had to run ani-on as otherwise the nodes wouldn't connect.
 
-5. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, noise-high: `noise-high.cap`
-6. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, noise-low: `noise-low.cap`
+7. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, noise-high: `noise-high.cap`
+8. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm, noise-low: `noise-low.cap`
