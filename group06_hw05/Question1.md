@@ -5,6 +5,7 @@
 * [about antenna options](https://sourceforge.net/p/android-x86/kernel/ci/604eeadd1880bddfb155369491cc13fb8d3f9df6/)
 * [ani.h file - gitlab](https://gitlab.denx.de/marex/linux-denx/blob/b1cdc4670b9508fcd47a15fbd12f70d269880b37/drivers/net/wireless/ath/ath5k/ani.h)
 * [debug commands info - also useful info on how to set stuff in general on debugfs files](http://osdir.com/ml/linux.drivers.ath5k.devel/2007-12/msg00011.html)
+* [supported ani modes](https://gitlab.tkn.tu-berlin.de/wishful/wishful_module_wifi_ath/commit/096248f71d33603d0c7631e995c536469131ad94?view=inline)
 
 ### Setup:
   1. Disable ANI on both `ath5k` cards: **NOTE: if nodes loose connection the ani settings will reset**
