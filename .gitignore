@@ -94,3 +94,5 @@ ENV/
 # RAR files for subimitions
 *.rar
 group06_hw04.zip
+*.cap
+
