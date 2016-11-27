@@ -1,0 +1,93 @@
+wlan0     ESSID: "group06_ap"
+          Access Point: 00:1B:B1:07:DB:9B
+          Mode: Master  Channel: 11 (2.462 GHz)
+          Tx-Power: 30 dBm  Link Quality: 31/70
+          Signal: -79 dBm  Noise: -99 dBm
+          Bit Rate: 1.0 MBit/s
+          Encryption: none
+          Type: nl80211  HW Mode(s): 802.11abg
+          Hardware: 168C:0013 185F:1012 [Generic MAC80211]
+          TX power offset: unknown
+          Frequency offset: unknown
+          Supports VAPs: yes  PHY name: phy0
+
+wlan1     ESSID: unknown
+          Access Point: 00:00:00:00:00:00
+          Mode: Monitor  Channel: 11 (2.462 GHz)
+          Tx-Power: 19 dBm  Link Quality: unknown/70
+          Signal: unknown  Noise: -95 dBm
+          Bit Rate: unknown
+          Encryption: unknown
+          Type: nl80211  HW Mode(s): 802.11abgn
+          Hardware: 168C:0029 168C:2096 [Generic MAC80211]
+          TX power offset: unknown
+          Frequency offset: unknown
+          Supports VAPs: yes  PHY name: phy1
+
+Interface wlan0
+	ifindex 21
+	wdev 0x9
+	addr 00:1b:b1:07:db:9b
+	ssid group06_ap
+	type AP
+	wiphy 0
+	channel 11 (2462 MHz), width: 20 MHz (no HT), center1: 2462 MHz
+	txpower 30.00 dBm
+	txpower 30.00 dBm
+	tx bitrate:	1.0 MBit/s
+
+**************************************************
+*************** Checking antenna *****************
+**************************************************
+
+antenna mode	2
+default antenna	2
+tx antenna	2
+
+ANTENNA		RX	TX
+[antenna 1]	10158	100
+[antenna 2]	11746158	61400
+[antenna 3]	0	0
+[antenna 4]	0	0
+[invalid]	0	0
+
+AR5K_DEFAULT_ANTENNA	0x00000002
+AR5K_STA_ID1_DEFAULT_ANTENNA	1
+AR5K_STA_ID1_DESC_ANTENNA	0
+AR5K_STA_ID1_RTS_DEF_ANTENNA	1
+AR5K_STA_ID1_SELFGEN_DEF_ANT	1
+
+AR5K_PHY_AGCCTL_OFDM_DIV_DIS	1
+AR5K_PHY_RESTART_DIV_GC		0
+AR5K_PHY_FAST_ANT_DIV_EN	0
+
+AR5K_PHY_ANT_SWITCH_TABLE_0	0x02082481
+AR5K_PHY_ANT_SWITCH_TABLE_1	0x02082481
+
+**************************************************
+**************** Checking ANI ********************
+**************************************************
+
+HW has PHY error counters:	yes
+HW max spur immunity level:	7
+
+ANI state
+--------------------------------------------
+operating mode:			OFF
+noise immunity level:		0
+spur immunity level:		0
+firstep level:			0
+OFDM weak signal detection:	off
+CCK weak signal detection:	off
+
+MIB INTERRUPTS:		47630
+beacon RSSI average:	0
+profcnt tx		22940	(0%)
+profcnt rx		3390872	(7%)
+profcnt busy		3447983	(7%)
+profcnt cycles		45055713
+listen time		124727	last: 0
+OFDM errors		0	last: 0	sum: 0
+CCK errors		0	last: 0	sum: 0
+AR5K_PHYERR_CNT1	0	(=-12582412)
+AR5K_PHYERR_CNT2	0	(=-12582712)

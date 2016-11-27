@@ -1,0 +1,79 @@
+wlan0     ESSID: "group06_ap"
+          Access Point: 00:1B:B1:07:DB:9B
+          Mode: Client  Channel: 11 (2.462 GHz)
+          Tx-Power: unknown  Link Quality: 25/70
+          Signal: -85 dBm  Noise: -100 dBm
+          Bit Rate: 24.0 MBit/s
+          Encryption: none
+          Type: nl80211  HW Mode(s): 802.11abg
+          Hardware: 168C:0013 185F:1012 [Generic MAC80211]
+          TX power offset: unknown
+          Frequency offset: unknown
+          Supports VAPs: yes  PHY name: phy0
+
+Interface wlan0
+	ifindex 10
+	wdev 0x7
+	addr 00:1b:b1:01:dc:b4
+	type managed
+	wiphy 0
+	channel 11 (2462 MHz), width: 20 MHz (no HT), center1: 2462 MHz
+	txpower 0.00 dBm
+	txpower 0.00 dBm
+	tx bitrate:	24.0 MBit/s
+
+**************************************************
+*************** Checking antenna *****************
+**************************************************
+
+antenna mode	2
+default antenna	2
+tx antenna	2
+
+ANTENNA		RX	TX
+[antenna 1]	379630	1035474
+[antenna 2]	977583	4073398
+[antenna 3]	0	0
+[antenna 4]	0	0
+[invalid]	0	0
+
+AR5K_DEFAULT_ANTENNA	0x00000002
+AR5K_STA_ID1_DEFAULT_ANTENNA	1
+AR5K_STA_ID1_DESC_ANTENNA	0
+AR5K_STA_ID1_RTS_DEF_ANTENNA	1
+AR5K_STA_ID1_SELFGEN_DEF_ANT	1
+
+AR5K_PHY_AGCCTL_OFDM_DIV_DIS	1
+AR5K_PHY_RESTART_DIV_GC		0
+AR5K_PHY_FAST_ANT_DIV_EN	0
+
+AR5K_PHY_ANT_SWITCH_TABLE_0	0x02082481
+AR5K_PHY_ANT_SWITCH_TABLE_1	0x02082481
+
+**************************************************
+**************** Checking ANI ********************
+**************************************************
+
+HW has PHY error counters:	yes
+HW max spur immunity level:	7
+
+ANI state
+--------------------------------------------
+operating mode:			OFF
+noise immunity level:		0
+spur immunity level:		0
+firstep level:			0
+OFDM weak signal detection:	on
+CCK weak signal detection:	on
+
+MIB INTERRUPTS:		48
+beacon RSSI average:	14
+profcnt tx		0	(0%)
+profcnt rx		2004793	(4%)
+profcnt busy		2026044	(4%)
+profcnt cycles		44841632
+listen time		47255	last: 0
+OFDM errors		0	last: 0	sum: 0
+CCK errors		0	last: 0	sum: 0
+AR5K_PHYERR_CNT1	0	(=-12582412)
+AR5K_PHYERR_CNT2	0	(=-12582712)
