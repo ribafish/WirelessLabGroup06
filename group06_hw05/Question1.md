@@ -139,11 +139,30 @@ Settings not listed below were left at default values.
 
 ## Conclusions:
 
-### Frame delivery ratios:
+### Frame delivery ratio comparisons:
 
 * When we compare runs with 0dBm and 30dBm transmission power, we can see that the 30dBm runs have a higher FDR, which was expected.
 
 * Comparing runs with weak signal detection on and off at 30dBm, we can see that setting it to ON delivers a slighlty better FDR, as expected. What is unexpected is that when we look at 0dBm runs, there isn't an even bigger difference, but instead setting weak signal detection to on delivers slightly worse results, with a worse CI. This was really unexpected, as we thought that when the signal is lower, setting weak signal detection to on makes a bigger difference, and more importantly that it would improve the FDR.
 
-* 
+* When comparing sensitivity levels, as expected we see that a high sensitivity performs better than low sensitivity. Low sensitivity also has a much broader median CI, which can be attributed to bigger differences between runs because of a lower SNR. Higher sensitivity has a narrower median CI, which would mean that a higher sensitivity amplifies the noise a bit less than the wanted signal, thus giving a better SNR and a better FDR.
+
+* When comparing high and low noise immunity we would expect that a high noise immunity would perform better, but from the results we see that a low noise immunity performs better. We don't know why is that, one possibility is that the noise wasn't that bad when we did our tests and the higher immunity influenced good frame reception as well, giving a worse FDR.
+
+All in all we see some surprises, but the biggest surprise is how small the differences between different experiments are, as the difference in FDR between the worst and the best case is below 0.5%.
+
+### Throughput comparisons:
+
+* Here too, the runs with 30dBm power perform a lot better, which was expected.
+
+* Comparing weak signal detection runs we see that setting this to on has a positive impact on throughput, both with 0dBm and even more with 30dBm, as expected, with a bigger performance boost with the lower power level, which makes sense, as there the signal is lower and a weak signal detection might recognize packets with an SNR lower than 14dB needed for strong signal detection.
+
+* Comparing high and low sensitivity we again see that a higher sensitivity performs better with the added benefit of median CI being much better than low sensitivity, which can also be expected, as a lower sensitivity would have bigger differences between runs.
+
+* Comparing high and low noise immunity we see a marginal difference with a high noise immunity being probably slightly better, but since the confidence intervals and quartiles are overlapping this might not be the case. Our test conclude that noise immunity has the lowest impact of all settings, which is a bit surprising, as we expected it to have a bigger impact given the name of the setting.
+
+The throughput results are much more in line with our expectations, with a stronger transmission power giving a big boost, as well as turning weak signal detection, as we expected. Furthemore, a high sensitivity setting also gives a performance boost, as well as better stability than low sensitivity, which we also expected.
+
+Maybe the biggest suprise is that we can not directly relate FDR to throughput with a 100% confidence, as we can see here that weak signal detection at 0dBm has a worse FDR than strong signal detection, but has a much better throughput.
+
 
