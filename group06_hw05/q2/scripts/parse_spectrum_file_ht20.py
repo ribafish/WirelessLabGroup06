@@ -1,8 +1,10 @@
 # parses a spectrum output from ath9k cards
 import struct
 
+# holds all parsed FFT_samples
 samples = []
 
+# information about the ht20 samples
 class FFT_sample_ht20:
 
   def __init__(self):
@@ -17,7 +19,7 @@ class FFT_sample_ht20:
     self.tsf           = None    # uint64
     self.data          = []      # uint8
 
-
+# parsing file read
 def parse_sample(binary_data, offset):
   new_sample = FFT_sample_ht20()
 
@@ -78,6 +80,7 @@ def parse_sample(binary_data, offset):
   return new_sample
 
 
+# reading a spectrum scan file of ath9k card
 def parse_file(file_path):
 
   file_content = read_file(file_path)
@@ -92,6 +95,7 @@ def parse_file(file_path):
 
   return samples
 
+# io to read the samples file
 def read_file(file_path):
   with open(file_path, 'r') as data_file:
     return data_file.read()

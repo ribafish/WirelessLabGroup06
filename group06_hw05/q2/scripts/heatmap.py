@@ -2,6 +2,7 @@ import sys
 import copy
 import colorsys
 
+# Represents one pixel within the heatmap
 class HeatPixel:
   def __init__(self, weight):
     self.weight = float(weight)
@@ -16,7 +17,7 @@ class HeatPixel:
   def heat(self):
     self.weight += 1
 
-
+# matrix of the image for the heatmap
 class HeatMap:
 
   def init_map(self, width, height):
@@ -41,9 +42,11 @@ class HeatMap:
       out += '\n'
     return out
 
+  # increase signal detect
   def heat_pixel_at(self, x, y):
     self.map[x][y].heat()
 
+  # normalize the data to 0.0 - 1.0
   def normalize(self):
     map = copy.deepcopy(self.map)
     lowest_value = sys.float_info.max

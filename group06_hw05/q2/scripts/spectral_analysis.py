@@ -6,15 +6,20 @@ import gc
 import sys
 
 
+# entrypoint
 def main():
+
+  # parsed samples
   samples = parse_spectrum_file_ht20.parse_file('../data/spectral_scan_wlan1.data')
   noise_floor = samples[0].noise
   
+  # mapped samples to more usable format
   samples_mapped = map_samples(samples)
 
   # clean up
   del samples; gc.collect()
 
+  # mins and max across all captures (2.4 and 5ghz)
   min_y = math.floor(
     reduce(lambda x, y: min(x, y['signal']), samples_mapped, sys.float_info.max)
   )
@@ -23,7 +28,7 @@ def main():
     reduce(lambda x, y: max(x, y['signal']), samples_mapped, -200)
   )
 
-  
+  # heatmap width and height
   discret_x = 50
   discret_y = 80
 
@@ -37,6 +42,7 @@ def main():
   plot_data(maps, min_y, max_y, noise_floor)
 
 
+# creates the heatmaps and adds the samples
 def create_heatmap(samples, min_y, max_y, discret_x, discret_y):
   map = heatmap.HeatMap(discret_x, discret_y)
 
@@ -58,12 +64,14 @@ def create_heatmap(samples, min_y, max_y, discret_x, discret_y):
 
   return (map, min_x, max_x)
 
+# split the samples in 2.4ghz and 5ghz with a splitter value
 def split_samples(samples, splitter):
   return (
     filter(lambda x: x['freq'] <= splitter, samples),
     filter(lambda x: x['freq'] > splitter, samples)
   )
 
+# plots the heatmap
 def plot_data(heatmaps, min_y, max_y, noise_floor):
 
   heatmap2ghz = heatmaps[0][0]
@@ -95,6 +103,8 @@ def plot_data(heatmaps, min_y, max_y, noise_floor):
   plt.show()
 
 
+# maps the samples 
+# see https://github.com/simonwunderlich/FFT_eval/blob/master/fft_eval.c
 def map_samples(samples):
   samples_mapped = []
   for sample in samples:
