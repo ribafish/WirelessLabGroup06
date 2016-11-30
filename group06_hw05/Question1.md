@@ -108,6 +108,8 @@
 
 We had the same settings on both nodes (sender and receiver), to maximise the impact of different settings, as this setup impacts the frame delivery ratio for ACK packets and beacons as well. We couldn't make `antenna-a` option to connect, even with highest power, so we used `antenna=b` with lowest transmission power (except for runs 3. and 4., which are required to have substantially different power).
 
+Settings not listed below were left at default values.
+
 1. Ani-off, cck-off, ofdm-off, Antenna-b, txpower 0dBm: `weak-off.cap`
 2. Ani-off, cck-on, ofdm-on, Antenna-b, txpower 0dBm: `weak-on.cap`
 3. Ani-off, cck-off, ofdm-off, Antenna-b, txpower 30dBm: `weak-off-30dBm.cap`
@@ -133,3 +135,15 @@ We had the same settings on both nodes (sender and receiver), to maximise the im
 
 ![Throughputs, zoomed]
 (https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/throughputs_zoomed.png)
+
+
+## Conclusions:
+
+### Frame delivery ratios:
+
+* When we compare runs with 0dBm and 30dBm transmission power, we can see that the 30dBm runs have a higher FDR, which was expected.
+
+* Comparing runs with weak signal detection on and off at 30dBm, we can see that setting it to ON delivers a slighlty better FDR, as expected. What is unexpected is that when we look at 0dBm runs, there isn't an even bigger difference, but instead setting weak signal detection to on delivers slightly worse results, with a worse CI. This was really unexpected, as we thought that when the signal is lower, setting weak signal detection to on makes a bigger difference, and more importantly that it would improve the FDR.
+
+* 
+
