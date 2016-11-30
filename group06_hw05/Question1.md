@@ -122,14 +122,14 @@ We had the same settings on both nodes (sender and receiver), to maximise the im
 
 ## Results:
 
-[FDRs]
+![FDRs]
 (https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/fdrs.png)
 
-[FDRS zoomed]
+![FDRS zoomed]
 (https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/fdrs_zommed.png)
 
-[Throughputs]
+![Throughputs]
 (https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/throughputs.png)
 
-[Throughputs, zoomed]
+![Throughputs, zoomed]
 (https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/throughputs_zoomed.png)
