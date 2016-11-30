@@ -1,0 +1,15 @@
+#! /bin/ash
+
+
+# switch on chanscan on phy1
+echo chanscan > /sys/kernel/debug/ieee80211/phy1/ath9k/spectral_scan_ctl
+
+# perfom scan on wlan1 and drop output
+iw dev wlan1 scan > /dev/null 2>&1
+
+# save the output in /root/hw05/spectral_scan_wlan1.data
+cat /sys/kernel/debug/ieee80211/phy1/ath9k/spectral_scan0 \
+  > /root/hw05/spectral_scan_wlan1.data
+
+# disable spectral scan
+echo disable > /sys/kernel/debug/ieee80211/phy1/ath9k/spectral_scan_ctl
