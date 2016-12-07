@@ -173,3 +173,4 @@ Terminology:
 ### Boxplots
 
 
+![](q1/cstrts_threshold_vs_frame_size.png)
