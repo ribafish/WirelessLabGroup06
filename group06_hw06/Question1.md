@@ -61,3 +61,115 @@ Actual Transmission Rate:
 ### Conclusion
 
 With RTS/CTS disabled there is a theoretical transmission rate of about 28.0 Mbps. With RTS/CTS enabled it is about 22.5 Mbps. That is 20 % less throughput. The reason are the additional frames for the handshake and the addtional propagation delays and SIFS. 
+
+## b) Data throughput with and without RTS/CTS
+
+Terminology: 
+
+* N6 = Node 6
+* N15 = Node 15
+* ST = Stepping Stone
+
+### Setup
+
+* N6 is set as the AP?
+
+	N6: `iw wlan0 info | grep type`
+	
+	Output: `type AP`
+	
+* Get N6 IP address
+	N6: `ifconfig wlan0 | grep "inet addr"`
+	
+	Output:
+	`inet addr:172.17.5.10  Bcast:172.17.5.255  Mask:255.255.255.0`
+	
+* N15 is set as client and connected to AP of N6
+
+	N15: `ping -I wlan0 172.17.5.10`
+	
+	Output (trunc): 
+	`64 bytes from 172.17.5.10: seq=0 ttl=64 time=0.898 ms`
+	
+* Enable RTS/CTS on N15:
+
+	N15: `iw phy phy0 set rts 100`
+
+* Set bitrates on both interfaces:
+
+	N15: `iw wlan0 set bitrates legacy-2.4 54.0`
+	N6: `iw wlan0 set bitrates legacy-2.4 54.0`
+	
+* Set tx power on client
+
+	N15: `iw wlan0 set txpower fixed 30.0`
+	
+* Review settings on client
+
+	N15: `iwinfo`
+	
+	Output: 
+	
+	```
+	wlan0 ESSID: "group06_ap"
+          Access Point: 00:1B:B1:07:DB:9B
+          Mode: Client  Channel: 11 (2.462 GHz)
+          Tx-Power: 30 dBm  Link Quality: 70/70
+          Signal: -38 dBm  Noise: -96 dBm
+          Bit Rate: 54.0 MBit/s
+          Encryption: none
+          Type: nl80211  HW Mode(s): 802.11abg
+          Hardware: 168C:0013 185F:1012 [Generic MAC80211]
+          TX power offset: unknown
+          Frequency offset: unknown
+          Supports VAPs: yes  PHY name: phy0
+	```
+
+* Start iperf server
+
+	N6: `iperf -s -u`
+	
+---
+	
+* Start client with 1400 B UDP datagrams CTS/RTS Threshold 100 B
+
+	```
+	for i in `seq 10`; do 
+		iperf -c 172.17.5.10 -u -b 54M -t 30 -l 1400
+		sleep 2
+	done
+	```
+
+* Start client with 200 B UDP datagrams CTS/RTS Threshold 100 B
+
+	```
+	for i in `seq 10`; do 
+		iperf -c 172.17.5.10 -u -b 54M -t 30 -l 200
+		sleep 2
+	done
+	```
+* disable CTS/RTS
+
+	N15: `iw phy phy0 set rts off`
+	
+* Start client with 1400 B UDP datagrams CTS/RTS off
+
+	```
+	for i in `seq 10`; do 
+		iperf -c 172.17.5.10 -u -b 54M -t 30 -l 1400
+		sleep 2
+	done
+	```
+
+* Start client with 200 B UDP datagrams CTS/RTS off
+
+	```
+	for i in `seq 10`; do 
+		iperf -c 172.17.5.10 -u -b 54M -t 30 -l 200
+		sleep 2
+	done
+	```
+	
+### Boxplots
+
+
