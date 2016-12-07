@@ -26,6 +26,7 @@ def main(argv):
 
     times_BSS, cus_BSS = get_cu_from_BSS(tcpdump)
     times_survey, cus_survey = get_cu_from_survey_dumps(survey)
+    times_manual, cus_manual = get_cu_from_trace_manually(tcpdump)
 
     plt.figure(figsize=(12, 8))
     plt.title("Channel utilization")
@@ -33,6 +34,7 @@ def main(argv):
     plt.ylabel("Channel Utilization [%]")
     plt.plot(times_BSS, cus_BSS, label="BSS Load")
     plt.plot(times_survey, cus_survey, label="Survey dump")
+    plt.plot(times_manual, cus_manual, label="Calculated from tcpdump")
     plt.legend(loc="best")
     plt.savefig("utilizations.png")
 
@@ -74,10 +76,51 @@ def get_cu_from_BSS(filepath):
     return times, utilizations
 
 def get_cu_from_trace_manually(filepath):
+    tcpdump_call = ("tshark -r %s -T fields -e frame.time_epoch -e frame.len -e radiotap.datarate -e radiotap.length -e frame.protocols -e udp.length"
+                    # " -c 1000" % filepath).split(" ")   # TODO: add a -c 1000 here if needed for quick tests
+                    "" % filepath).split(" ")  # TODO: add a -c 1000 here if needed for quick tests
+    lines = sub.check_output(tcpdump_call, universal_newlines=True).split('\n')
+    if len(lines) == 0:
+        raise Exception("No usable lines in %s" % filepath)
+
+    t_phy_overhead = 20 # 20us = preamble + phy header
+    t_ofdm = 4
     utilizations = []
     times = []
+    cur_time = int(lines[0].split()[0].split('.')[0])
+    time_consumed = 0
+    for i in range(0, len(lines) - 1):  # -1 because last line is empty
+        try:
+            # for each frame in trace
+            time = int(lines[i].split()[0].split('.')[0])  # Epoch time
+            total_len = int(lines[i].split()[1])    # Total capture len in bytes
+            datarate = float(lines[i].split()[2].replace(',', '.'))     # datarate from Radiotap header
+            radiotap_len = int(lines[i].split()[3]) # Radiotap header size to be subtracted from total frame len as its transmitted at a different bitrate
+            protocols = lines[i].split()[4].split(":") # get all protocols that the frame uses
 
+            rate = datarate*1024*1024/8.0/1000000.0 # get the datarate in Bytes per us
 
+            transmit_time = t_phy_overhead + t_ofdm + (total_len-radiotap_len) / rate
+
+            if "udp" in protocols:
+                ack = t_phy_overhead + t_ofdm + (42) / rate    # 42 B = 28 B for mac header + 14 B for ack size
+                transmit_time += ack
+
+            if (time == cur_time):
+                time_consumed += transmit_time
+            else:
+                percentage = time_consumed / 1000000.0  # how much time [us] we used in each second
+                utilizations.append(percentage * 100)  # Get percent Channel Utilization value (mean/255*100)
+                times.append(cur_time)
+                cur_time = time
+                time_consumed = transmit_time
+        except:
+            print("Error in line: %s"%lines[i])
+            raise
+
+    percentage = time_consumed / 1000000.0  # how much time [us] we used in each second
+    utilizations.append(percentage * 100)  # Get percent Channel Utilization value (mean/255*100)
+    times.append(cur_time)
     return times, utilizations
 
 def get_cu_from_survey_dumps(filepath):
