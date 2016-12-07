@@ -1,0 +1,12 @@
+root@lede:~# iperf -c 172.17.5.10 -u -b 54M -t 15
+------------------------------------------------------------
+Client connecting to 172.17.5.10, UDP port 5001
+Sending 1470 byte datagrams, IPG target: 217.78 us (kalman adjust)
+UDP buffer size:  160 KByte (default)
+------------------------------------------------------------
+[  3] local 172.17.5.11 port 52669 connected with 172.17.5.10 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-15.0 sec  13.4 MBytes  7.50 Mbits/sec
+[  3] Sent 9571 datagrams
+[  3] Server Report:
+[  3]  0.0-15.0 sec  13.4 MBytes  7.49 Mbits/sec   3.568 ms    0/ 9571 (0%)
