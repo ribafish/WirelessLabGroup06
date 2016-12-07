@@ -191,7 +191,7 @@ def plot_bar_utilization_by_type(filepath):
 
             transmit_time = t_phy_overhead + t_ofdm + (total_len - radiotap_len) / rate
 
-            if "udp" in protocols and "data" in protocols:
+            if "udp" in protocols and "data" in protocols:  # Checking for UDP and data protocols to get our UDP traffic
                 if first_udp_epoch == 0: first_udp_epoch = epoch
                 last_udp_epoch = epoch
 
