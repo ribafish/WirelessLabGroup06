@@ -60,7 +60,7 @@
 	
 * Commands for the test:
 
-	SteppingStone: `nc -l -p 8080 > filename.cap`
+	ST: `nc -l -p 8080 > filename.cap`
 
 	N6: `./capture_manager.sh`
 
