@@ -35,7 +35,7 @@ Defintions:
 * Total Time: $t_{total} = t_{DIFS} + t_{CW} + 2 \cdot t_{pd} + t_{data} + t_{SIFS} + t_{ack} \approx 397\ \mu s$
 
 
-Actual Transmission Rate:
+Calculated Transmission Rate:
 
  $r_{act} = \frac{dmpay}{t_{total}} \approx \frac{1452\ B}{397\ \mu s} \approx \frac{1.11 \cdot 10^{-2}\ Mbit}{3.97 \cdot 10^{-4} s} \approx 28.0\ \text{Mbps}$
  
@@ -54,7 +54,7 @@ Additional Definitions to the previous:
 * Transmission duration CTS: $t_{cts} = t_{phy} + t_{ODFM} + \frac{d_{mhead} + d_{rts}}{r} \approx 31\ \mu s$
 * Total Time: $t_{total} = t_{DIFS} + t_{CW} + 4 \cdot t_{pd} + t_{rts} + t_{cts} + t_{data} + 3 \cdot t_{SIFS} + t_{ack} \approx 493\ \mu s$
 
-Actual Transmission Rate:
+Calculated Transmission Rate:
 
  $r_{act} = \frac{dmpay}{t_{total}} \approx \frac{1452\ B}{493\ \mu s} \approx \frac{1.11 \cdot 10^{-2}\ Mbit}{4.93 \cdot 10^{-4} s} \approx 22.5\ \text{Mbps}$
  
@@ -174,3 +174,15 @@ Terminology:
 
 
 ![](q1/cstrts_threshold_vs_frame_size.png)
+
+### Conclusion
+
+The figure above shows boxplots from four experiments which are the combinations of CTS/RTS off and on, and UDP Packet Size of 1400 Bytes and 200 Bytes. The UDP data sent is fixed on all experiments (54 Mbps). We expected RTS/CTS enabled to have a smaller throughput with same packet lengths because it introduces additional MAC frames that do not transport actual payload but control the traffic. Also, in theory, RTS/CTS enabled results in a more stable throughput, because it reduced the risk of frame loss due to collisions.
+
+RTS/CTS disabled produce the best throughput respectively on the same UDP size but are also more spread visible at the CIs. Exactly as expected. 
+
+What is different from our expectations is the difference between the calculated theoretical and the actual throughput. For UDP with about 1400 B size we calculated 28 Mbps. But we measured around 18 Mbps (-36% less) for CTS/RTS disbaled. With this feature enabled we measured around 8 Mbps (-65% than calculated). In general the actual throughput is less because of other traffic on the medium like beacons and other control and management frames as well as interference.
+
+A possible reason for CTS/RTS-enabled-throughput is even slower (compare percentages in previous paragraph) is that there might be
+exposed terminals that prevents the client from sending.
+
