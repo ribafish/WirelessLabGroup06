@@ -125,16 +125,16 @@ Settings not listed below were left at default values.
 ## Results:
 
 ![FDRs]
-(q1/fdrs.png)
+(https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/fdrs.png)
 
 ![FDRS zoomed]
-(q1/fdrs_zommed.png)
+(https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/fdrs_zommed.png)
 
 ![Throughputs]
-(q1/throughputs.png)
+(https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/throughputs.png)
 
 ![Throughputs, zoomed]
-(q1/throughputs_zoomed.png)
+(https://github.com/ribafish/WirelessLabGroup06/blob/master/group06_hw05/q1/throughputs_zoomed.png)
 
 
 ## Conclusions:
