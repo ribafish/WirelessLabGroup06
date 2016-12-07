@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 
 import subprocess as sub
-import numpy as np
-import sys, getopt, re
+import sys, getopt
 import matplotlib.pyplot as plt
-import glob
+import time
 
 def main(argv):
     folder = ""
@@ -28,8 +27,10 @@ def main(argv):
     times_survey, cus_survey = get_cu_from_survey_dumps(survey)
     times_manual, cus_manual = get_cu_from_trace_manually(tcpdump)
 
+    date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(times_BSS[0]))
+
     plt.figure(figsize=(12, 8))
-    plt.title("Channel utilization")
+    plt.title("Channel utilization on %s"%date)
     plt.xlabel("Time [s]")
     plt.ylabel("Channel Utilization [%]")
     plt.plot(times_BSS, cus_BSS, label="BSS Load")
