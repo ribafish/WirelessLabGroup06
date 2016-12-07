@@ -10,7 +10,7 @@ import sys
 def main():
 
   # parsed samples
-  samples = parse_spectrum_file_ht20.parse_file('../data/spectral_scan_wlan1.data')
+  samples = parse_spectrum_file_ht20.parse_file('../data/spectral_scan_wlan1_2.data')
   noise_floor = samples[0].noise
   
   # mapped samples to more usable format
@@ -119,7 +119,10 @@ def map_samples(samples):
       freq = sample.freq - (22.0 * 56 / 64.0) / 2 + (22.0 * (i +0.5) / 64.0)
       raw_data = sample.data[i] << sample.max_exp
       raw_data = raw_data if raw_data != 0 else 1
+      data_square_sum = data_square_sum if data_square_sum != 0 else 1
+
       signal = sample.noise + sample.rssi + 20.0 * math.log10(raw_data) - math.log10(data_square_sum) * 10
+
       samples_mapped.append({'freq': freq, 'signal': signal})
 
   return samples_mapped

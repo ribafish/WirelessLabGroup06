@@ -8,7 +8,7 @@ class HeatPixel:
     self.weight = float(weight)
 
   def color(self):
-    r, g, b = colorsys.hsv_to_rgb( 0.66 - (self.weight / 3.0 * 2.0), 1.0, 1.0)
+    r, g, b = colorsys.hsv_to_rgb( 0.66 - (self.weight ), 1.0, 1.0)
     return [r, g, b]
 
   def __str__(self):
