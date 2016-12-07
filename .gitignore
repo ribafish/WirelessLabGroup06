@@ -92,6 +92,7 @@ ENV/
 */.idea/
 */.idea/*
 *.iml
+vcs.xml
 
 
 # RAR files for subimitions
