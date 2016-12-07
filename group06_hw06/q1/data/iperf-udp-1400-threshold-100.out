@@ -1,0 +1,26 @@
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  160 KByte (default)
+------------------------------------------------------------
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 46880
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.1 sec  31.8 MBytes  8.89 Mbits/sec   3.510 ms    0/23854 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 45359
+[  4]  0.0-30.1 sec  32.6 MBytes  9.09 Mbits/sec   4.393 ms    0/24440 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 39315
+[  3]  0.0-30.1 sec  32.2 MBytes  8.98 Mbits/sec   4.281 ms    0/24113 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 37568
+[  4]  0.0-30.1 sec  30.4 MBytes  8.49 Mbits/sec   3.764 ms    0/22790 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 34667
+[  3]  0.0-30.1 sec  29.8 MBytes  8.31 Mbits/sec   4.258 ms    0/22304 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 37175
+[  4]  0.0-30.1 sec  30.1 MBytes  8.40 Mbits/sec   4.599 ms    0/22562 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 40864
+[  3]  0.0-30.2 sec  28.0 MBytes  7.79 Mbits/sec   8.782 ms    0/20991 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 56187
+[  4]  0.0-30.1 sec  27.9 MBytes  7.77 Mbits/sec   4.551 ms    0/20860 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 39705
+[  3]  0.0-30.1 sec  29.0 MBytes  8.08 Mbits/sec   4.209 ms    0/21696 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 38432
+[  4]  0.0-30.1 sec  31.0 MBytes  8.64 Mbits/sec   4.144 ms    0/23213 (0%)

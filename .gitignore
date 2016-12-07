@@ -90,6 +90,9 @@ ENV/
 
 # PyCharm project files
 */.idea/
+*/.idea/*
+*.iml
+
 
 # RAR files for subimitions
 *.rar
