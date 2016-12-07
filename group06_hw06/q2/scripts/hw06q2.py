@@ -25,14 +25,13 @@ def main(argv):
 
     times_BSS, cus_BSS = get_cu_from_BSS(tcpdump)
 
-
-
+    plt.figure(figsize=(12, 8))
     plt.title("Channel utilization")
     plt.xlabel("Time [s]")
     plt.ylabel("Channel Utilization [%]")
     plt.plot(times_BSS, cus_BSS, label="BSS Load")
     plt.legend(loc="best")
-    plt.savefig("../utilizations.png")
+    plt.savefig("utilizations.png")
 
 
 
@@ -41,7 +40,8 @@ def get_cu_from_BSS(filepath):
 
     tcpdump_call = ("tshark -r %s -T fields -e frame.time_epoch -e wlan_mgt.qbss.cu "
                     "-Y (((wlan.fc.type_subtype==0x0008)&&(wlan_mgt.tag.number==11))&&(wlan_mgt.qbss.cu>0))&&(radiotap.channel.freq==2462)"
-                    "" % filepath).split(" ")   # TODO: add a -c 1000 here if needed for quick tests
+                    # " -c 1000" % filepath).split(" ")   # TODO: add a -c 1000 here if needed for quick tests
+                    "" % filepath).split(" ")  # TODO: add a -c 1000 here if needed for quick tests
     lines = sub.check_output(tcpdump_call, universal_newlines=True).split('\n')
 
     utilizations = []
