@@ -21,25 +21,25 @@ echo "  tcpdump started with PID $TCPDUMP_PID"
 
 for i in `seq 50`; do
   date +%s >> $SURVEYFILE
-    iw dev wlan0 survey dump >> $SURVEYFILE
-      sleep 0.1
-      done
+  iw dev wlan0 survey dump >> $SURVEYFILE
+  sleep 0.1
+done
 
-      echo "Starting iperf server"
-      iperf -s -u > /dev/null 2>&1 &
-      IPERF_PID=`ps | grep "iperf -s -u" | grep -v grep | awk '{print $1}'`
-      echo "iperf started with PID $IPERF_PID"
+echo "Starting iperf server"
+iperf -s -u > /dev/null 2>&1 &
+IPERF_PID=`ps | grep "iperf -s -u" | grep -v grep | awk '{print $1}'`
+echo "iperf started with PID $IPERF_PID"
 
-      for i in `seq 200`; do
-        date +%s >> $SURVEYFILE
-	  iw dev wlan0 survey dump >> $SURVEYFILE
-	    sleep 0.1
-	    done
+for i in `seq 200`; do
+  date +%s >> $SURVEYFILE
+  iw dev wlan0 survey dump >> $SURVEYFILE
+  sleep 0.1
+done
 
 
-	    kill $IPERF_PID
-	    sleep 1
-	    kill $TCPDUMP_PID
+kill $IPERF_PID
+sleep 1
+kill $TCPDUMP_PID
 
 
 
