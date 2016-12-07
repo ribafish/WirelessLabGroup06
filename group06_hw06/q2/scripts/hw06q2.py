@@ -191,7 +191,7 @@ def plot_bar_utilization_by_type(filepath):
 
             transmit_time = t_phy_overhead + t_ofdm + (total_len - radiotap_len) / rate
 
-            if "udp" in protocols:
+            if "udp" in protocols and "data" in protocols:
                 if first_udp_epoch == 0: first_udp_epoch = epoch
                 last_udp_epoch = epoch
 
@@ -212,7 +212,7 @@ def plot_bar_utilization_by_type(filepath):
     timeframe = (last_udp_epoch - first_udp_epoch) * 1000000.0    # Time frame in us
     udp_percent = udp_time / timeframe * 100.0
     other_percent = non_udp_in_udp_timeframe / timeframe * 100.0
-    no_traffic_percent = (udp_time + non_udp_in_udp_timeframe) / timeframe * 100.0
+    no_traffic_percent = (timeframe - (udp_time + non_udp_in_udp_timeframe)) / timeframe * 100.0
     labels = ["UDP", "Other", "No traffic"]
     values  = [udp_percent, other_percent, no_traffic_percent]
 
