@@ -1,0 +1,30 @@
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  160 KByte (default)
+------------------------------------------------------------
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 36021
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.3 sec  20.0 MBytes  5.52 Mbits/sec  17.429 ms    0/20452 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 50919
+[  4]  0.0-30.0 sec  17.3 MBytes  4.83 Mbits/sec   3.902 ms    0/17712 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 48366
+[  3]  0.0-30.0 sec  16.2 MBytes  4.54 Mbits/sec   2.425 ms    0/16628 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 40910
+[  4]  0.0-30.1 sec  17.3 MBytes  4.84 Mbits/sec   4.278 ms    0/17752 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 33672
+[  3]  0.0-30.2 sec  18.1 MBytes  5.02 Mbits/sec   8.898 ms    0/18499 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 36942
+[  4]  0.0-30.0 sec  16.5 MBytes  4.61 Mbits/sec   2.825 ms    0/16913 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 57974
+[  3]  0.0-30.2 sec  16.6 MBytes  4.62 Mbits/sec   7.666 ms    0/17029 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 51448
+[  4]  0.0-30.0 sec  15.9 MBytes  4.44 Mbits/sec   2.305 ms    0/16286 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 36329
+[  3]  0.0-30.2 sec  13.8 MBytes  3.83 Mbits/sec   9.830 ms    0/14095 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 52763
+[  4]  0.0-30.1 sec  17.3 MBytes  4.83 Mbits/sec   4.522 ms    0/17749 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 58695
+[  3]  0.0-30.2 sec  14.9 MBytes  4.15 Mbits/sec   7.137 ms    0/15282 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 40084
+[  4]  0.0-30.1 sec  17.4 MBytes  4.84 Mbits/sec   6.514 ms    0/17789 (0%)

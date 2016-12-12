@@ -1,0 +1,30 @@
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  160 KByte (default)
+------------------------------------------------------------
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 49037
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.0 sec  17.3 MBytes  4.84 Mbits/sec   5.044 ms    1/17743 (0.0056%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 56329
+[  4]  0.0-30.1 sec  19.6 MBytes  5.48 Mbits/sec   4.096 ms   48/20164 (0.24%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 43809
+[  3]  0.0-30.1 sec  20.4 MBytes  5.68 Mbits/sec   5.808 ms    0/20855 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 47674
+[  4]  0.0-30.0 sec  18.7 MBytes  5.23 Mbits/sec   4.045 ms    0/19182 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 49760
+[  3]  0.0-30.1 sec  20.2 MBytes  5.62 Mbits/sec   4.928 ms    0/20645 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 34713
+[  4]  0.0-30.1 sec  20.3 MBytes  5.66 Mbits/sec   4.239 ms    0/20793 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 44540
+[  3]  0.0-30.1 sec  20.6 MBytes  5.75 Mbits/sec   4.330 ms    0/21121 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 33068
+[  4]  0.0-30.1 sec  21.1 MBytes  5.87 Mbits/sec   5.171 ms    0/21557 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 38921
+[  3]  0.0-30.1 sec  21.3 MBytes  5.94 Mbits/sec   4.159 ms    7/21827 (0.032%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 42460
+[  4]  0.0-30.0 sec  21.5 MBytes  6.01 Mbits/sec   4.591 ms    3/22037 (0.014%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 36968
+[  3]  0.0-30.1 sec  19.1 MBytes  5.32 Mbits/sec   5.023 ms    2/19546 (0.01%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 58935
+[  4]  0.0-30.1 sec  21.0 MBytes  5.85 Mbits/sec   3.621 ms    0/21456 (0%)
