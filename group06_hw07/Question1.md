@@ -181,3 +181,68 @@ Network & Terminology:
 		* ST: `nc -l -p 8080 > "trace-ch11-20dbm-ant2-$(date +%s).cap"`
 	
 * Repeat all steps at a different time of the day
+
+## b
+
+Since we decoded the timestamp and other meta information in the file name
+we can you our pyhton script `capture_times.py`to give us information
+about all caputres in a table style.
+
+```
+Ordered Overview of capture-time and settings
+=================================================================
+| 16:41:07 12.12.2016  | ANT:   ant2 | TXPWR:  1dbm | CH:  ch11 |
+| 17:02:44 12.12.2016  | ANT:   ant2 | TXPWR: 10dbm | CH:  ch11 |
+| 17:12:56 12.12.2016  | ANT:   ant2 | TXPWR: 20dbm | CH:  ch11 |
+| 17:28:09 12.12.2016  | ANT:   ant1 | TXPWR:  1dbm | CH:  ch11 |
+| 17:47:10 12.12.2016  | ANT:   ant1 | TXPWR: 10dbm | CH:  ch11 |
+| 17:59:30 12.12.2016  | ANT:   ant1 | TXPWR: 20dbm | CH:  ch11 |
+| 13:28:57 14.12.2016  | ANT:   ant1 | TXPWR: 10dbm | CH:  ch11 |
+| 13:39:26 14.12.2016  | ANT:   ant1 | TXPWR:  1dbm | CH:  ch11 |
+| 13:53:01 14.12.2016  | ANT:   ant1 | TXPWR: 20dbm | CH:  ch11 |
+| 14:06:16 14.12.2016  | ANT:   ant2 | TXPWR:  1dbm | CH:  ch11 |
+| 14:16:56 14.12.2016  | ANT:   ant2 | TXPWR: 10dbm | CH:  ch11 |
+| 14:45:22 14.12.2016  | ANT:   ant2 | TXPWR: 20dbm | CH:  ch11 |
+-----------------------------------------------------------------
+
+12 captures in total
+```
+
+### Boxplot: Throughput vs txpower and antenna using minstrel
+
+![](q1/boxplot_combined.png)
+
+In this experiment minstrel is enabled as a rate control mechanism. 
+On the y-axis there is the throughput given by iperf server log in Mbit/s
+versus the six boxplots.
+In total there are 12 runs with basically three factors: which of antenna a and b, transmission power of 1dBm, 10 dBm and 20 dBm and lastly the time factor. 
+We know from previous assignments and the forum that port 1 has no antenna attached to 
+it and port 2 is a pigtail antenna. For antenna port 1 the medians are between 4 and 5 Mbit/s for all transmission power settings. But the throughput is also spread between 1 and 6 Mbit/s. Taking a glimpse on the raw data this is probably due to the different times the frame were captured. Generally speaking, the power transmission setting does not have much influence on the throughput of antenna port 1. The reason for this might be the short distance between the nodes. 
+
+For the pigtail antenna we can see a slightly different behaviour. The distance is 
+still the same but the mean for 1 dBm transmission power shows about 1.5 Mbit/s worse performance. While at 10 dBm the quartiles are of same size as antenna port 1, 1 dBm and 20 dBm show a narrower quartiles.
+
+In conclusion we can not see that the transmission power or the antenna has significant
+impact on the performance which was not really expected. Assumingly a higher transmission power would lead to better performance. But this is not observable.
+
+### Barplot: Distribution of transmission rate selection
+
+![](q1/barplot_combined.png)
+
+The figure above shows six bar plots for the combination of factor transmission power 
+and used antenna port 1 and 2. Column 1 show the relative count of transmission rates
+on the y-axis for antenna port 1 and column 2 respectively for antenna port 2.
+The rates were gathered from the 802.11 frame header picked by the minstrel mechanism 
+of the client. For antenna port 1 we observe two significant peaks at 11.0 Mb/s and 18 Mb/s. with a hasty glance at the raw data we can see that at capture time t1 we have a 
+steady transmission rate of 18.0 Mb/s whereas at time t2 its only 11.0 Mb/s. This
+timely seperation allows us to conclude that minstrel is selecting a constant rate for 
+all transmission power levels. 
+
+For the antenna port 2 we can see that minstrel is selecting way higher rates between
+36.0 and 54.0 Mb/s throughout all transmission powers and times. Only at 1 dBm we see 
+that it tends to select more higher rates then 10 dBm and 20 dbm. 
+
+If we compare this barplot with the box plot we can conclude that even higher picked 
+transmission rates didn't necessarily lead to a higher throughput. Which gives a hint
+that the selection wasn't optimal at all experiments.
+
