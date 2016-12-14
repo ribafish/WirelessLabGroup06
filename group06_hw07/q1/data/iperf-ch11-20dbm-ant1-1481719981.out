@@ -1,0 +1,30 @@
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  160 KByte (default)
+------------------------------------------------------------
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 45860
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.2 sec  10.3 MBytes  2.87 Mbits/sec   8.199 ms    0/10562 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 34992
+[  4]  0.0-30.3 sec  9.33 MBytes  2.59 Mbits/sec  11.349 ms    0/ 9559 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 56812
+[  3]  0.0-30.1 sec  11.7 MBytes  3.25 Mbits/sec   7.147 ms    0/11947 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 43989
+[  4]  0.0-30.1 sec  12.1 MBytes  3.38 Mbits/sec   8.927 ms    0/12419 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 53868
+[  3]  0.0-30.1 sec  12.2 MBytes  3.39 Mbits/sec   6.320 ms    2/12472 (0.016%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 59949
+[  4]  0.0-30.2 sec  12.3 MBytes  3.43 Mbits/sec   7.049 ms    0/12642 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 36589
+[  3]  0.0-30.1 sec  12.2 MBytes  3.41 Mbits/sec   6.449 ms    0/12517 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 34605
+[  4]  0.0-30.2 sec  12.4 MBytes  3.45 Mbits/sec   7.812 ms    0/12714 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 54144
+[  3]  0.0-30.2 sec  12.3 MBytes  3.41 Mbits/sec   5.680 ms    1/12571 (0.008%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 41867
+[  4]  0.0-30.1 sec  12.4 MBytes  3.45 Mbits/sec   8.035 ms    0/12663 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 34952
+[  3]  0.0-30.1 sec  12.7 MBytes  3.54 Mbits/sec   8.701 ms    0/13040 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 42245
+[  4]  0.0-30.1 sec  12.7 MBytes  3.55 Mbits/sec   6.813 ms    1/13027 (0.0077%)

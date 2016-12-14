@@ -1,0 +1,30 @@
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  160 KByte (default)
+------------------------------------------------------------
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 51504
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-30.2 sec  10.6 MBytes  2.94 Mbits/sec   6.958 ms    0/10819 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 56909
+[  4]  0.0-30.2 sec  8.97 MBytes  2.49 Mbits/sec  10.175 ms    0/ 9185 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 38834
+[  3]  0.0-30.1 sec  14.4 MBytes  4.02 Mbits/sec  10.484 ms    0/14754 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 60857
+[  4]  0.0-30.1 sec  12.2 MBytes  3.41 Mbits/sec  11.880 ms    0/12531 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 47277
+[  3]  0.0-30.2 sec  10.3 MBytes  2.86 Mbits/sec   9.733 ms    0/10546 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 56879
+[  4]  0.0-30.1 sec  11.8 MBytes  3.29 Mbits/sec   6.305 ms    1/12076 (0.0083%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 58902
+[  3]  0.0-30.2 sec  11.7 MBytes  3.27 Mbits/sec  10.695 ms    1/12030 (0.0083%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 40936
+[  4]  0.0-30.1 sec  15.3 MBytes  4.25 Mbits/sec   7.017 ms    0/15622 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 43495
+[  3]  0.0-30.1 sec  18.2 MBytes  5.07 Mbits/sec   4.306 ms    0/18590 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 45526
+[  4]  0.0-30.1 sec  14.4 MBytes  4.01 Mbits/sec   9.685 ms    0/14727 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 55089
+[  3]  0.0-30.1 sec  15.1 MBytes  4.21 Mbits/sec   6.717 ms    0/15493 (0%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 53207
+[  4]  0.0-30.1 sec  14.8 MBytes  4.13 Mbits/sec   8.088 ms    0/15194 (0%)

@@ -74,7 +74,7 @@ Network & Terminology:
 
 * check if ministrel is enabled
 
-	* N15: dmesg | grep "ieee80211 phy0"
+	* N15: `dmesg | grep "ieee80211 phy0"`
 
 		Output: 
 		
@@ -150,7 +150,9 @@ Network & Terminology:
 			txpower 1.00 dBm
 			```
 			
-		* n15: `echo "fixed-b" > /sys/kernel/debug/ieee80211/phy0/ath5k/antenna`
+		* n6: `echo "fixed-b" > /sys/kernel/debug/ieee80211/phy0/ath5k/antenna`
+
+ 		* n15: `echo "fixed-b" > /sys/kernel/debug/ieee80211/phy0/ath5k/antenna`
 		
 		* ST: `nc -l -p 8080 > "trace-ch11-1dbm-ant2-$(date +%s).cap"`
 
@@ -178,3 +180,4 @@ Network & Terminology:
 		
 		* ST: `nc -l -p 8080 > "trace-ch11-20dbm-ant2-$(date +%s).cap"`
 	
+* Repeat all steps at a different time of the day

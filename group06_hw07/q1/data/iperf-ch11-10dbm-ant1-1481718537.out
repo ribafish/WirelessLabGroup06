@@ -1,0 +1,32 @@
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  160 KByte (default)
+------------------------------------------------------------
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 32838
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0-31.2 sec  5.27 MBytes  1.42 Mbits/sec  93.297 ms    2/ 5400 (0.037%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 41645
+[  4]  0.0-30.2 sec  8.95 MBytes  2.49 Mbits/sec   9.371 ms    0/ 9165 (0%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 34164
+[  3]  0.0-30.2 sec  1.57 MBytes   436 Kbits/sec   8.744 ms 18766/20371 (92%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 36438
+[  4]  0.0-31.4 sec  7.73 MBytes  2.07 Mbits/sec  97.608 ms    2/ 7921 (0.025%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 53803
+[  3]  0.0-30.2 sec  5.60 MBytes  1.56 Mbits/sec  10.340 ms    3/ 5740 (0.052%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 42274
+[  4]  0.0-30.9 sec  2.75 MBytes   746 Kbits/sec  78.114 ms 52334/55145 (95%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 53409
+[  3]  0.0-30.8 sec  9.58 MBytes  2.61 Mbits/sec  59.045 ms    3/ 9818 (0.031%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 59475
+[  4]  0.0-30.1 sec  4.58 MBytes  1.28 Mbits/sec   9.047 ms    1/ 4691 (0.021%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 52839
+[  3]  0.0-30.5 sec  6.47 MBytes  1.78 Mbits/sec  40.113 ms    5/ 6629 (0.075%)
+read failed: Connection refused
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 38735
+[  4]  0.0-30.1 sec  8.46 MBytes  2.36 Mbits/sec   7.410 ms    1/ 8661 (0.012%)
+[  3] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 42320
+[  3]  0.0-30.6 sec  3.32 MBytes   910 Kbits/sec  39.265 ms    3/ 3405 (0.088%)
+[  4] local 172.17.5.10 port 5001 connected with 172.17.5.11 port 58531
+[  4]  0.0-30.9 sec  10.3 MBytes  2.79 Mbits/sec  66.763 ms    0/10536 (0%)
+read failed: Connection refused

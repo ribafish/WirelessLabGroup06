@@ -10,26 +10,55 @@ def main():
   iperf_file_paths = glob.glob("data/iperf-*.out")
   trace_file_paths = glob.glob("data/trace-*.cap")
   
-  boxplot(iperf_file_paths)
-  #barplot(trace_file_paths)
+  #boxplot(iperf_file_paths)
+  barplot(trace_file_paths)
 
 
 def boxplot(iperf_file_paths):
   iperf_data_sets = []
   for file_path in iperf_file_paths:
-    iperf_data_sets.append({
-        'data': parse_iperf_data(read_file(file_path)),
-        'info': extract_info_from_file_path(file_path)
-    })
+    info = extract_info_from_file_path(file_path)
+
+    existing_data_set = next((ds for ds in iperf_data_sets if ds['info'] == info), None)
+
+    if existing_data_set is not None:
+      existing_data_set['data'] += parse_iperf_data(
+          read_file(file_path)
+      )
+    else:
+      iperf_data_sets.append({
+          'data': parse_iperf_data(read_file(file_path)),
+          'info': info
+      })
+
   plot_boxplot_sets(iperf_data_sets)
+
+
 
 def barplot(trace_file_paths):
   trace_data_sets = []
   for file_path in trace_file_paths:
-    trace_data_sets.append({
-        'data': parse_tcpdump_data(read_tcpdump_file(file_path)),
-        'info': extract_info_from_file_path(file_path)
-    })
+    info = extract_info_from_file_path(file_path)
+
+    existing_data_set = next((ds for ds in trace_data_sets if ds['info'] == info), None)
+
+    if existing_data_set is not None:
+      existing_data_set = existing_data_set['data']
+      new_data_set =parse_tcpdump_data(
+          read_tcpdump_file(file_path)
+      )
+      for key in new_data_set.keys():
+        if key not in existing_data_set.keys():
+          existing_data_set[key] = 0
+        existing_data_set[key] += new_data_set[key]
+
+
+    else:
+      trace_data_sets.append({
+          'data': parse_tcpdump_data(read_tcpdump_file(file_path)),
+          'info': info
+      })
+
   plot_barplot_sets(trace_data_sets)
 
 def plot_barplot_sets(data_sets):
@@ -37,6 +66,8 @@ def plot_barplot_sets(data_sets):
 
 
   fig, axes = plt.subplots(int(ceil(len(data_sets)/2.0)),2)
+
+  # data_sets = sorted(data_sets, key=sort_by_txpower_key)
 
   for data_set_i in range(0, len(data_sets)):
     data = data_sets[data_set_i]['data']
@@ -66,7 +97,7 @@ def plot_boxplot_sets(data_sets):
   labels = []
   data = []
 
-  for data_set in data_sets:
+  for data_set in sorted(data_sets, key=sort_by_antenna_key):
     data.append(data_set['data'])
     labels.append("CH %s\n TX PWR: %s\n ANT: %s" % (
       data_set['info']['channel'],
@@ -128,8 +159,7 @@ def extract_info_from_file_path(file_path):
   return {
     'channel': int(file_name_partials[0].lstrip("ch")),
     'txpower': int(file_name_partials[1].rstrip("dbm")),
-    'antenna': int(file_name_partials[2].lstrip("ant")),
-    'timestamp': datetime.fromtimestamp(int(file_name_partials[3]))
+    'antenna': int(file_name_partials[2].lstrip("ant"))
   }
 
 
@@ -179,6 +209,10 @@ def parse_iperf_line_and_convert_to_mbps(result):
 
   raise ValueError('Result string must have an unit of MBytes, KBytes or Bytes got', unit)
 
+def sort_by_antenna_key(dict):
+  return (dict['info']['antenna'], dict['info']['txpower'])
 
+def sort_by_txpower_key(dict):
+  return (dict['info']['txpower'], dict['info']['antenna'])
 
 main()
