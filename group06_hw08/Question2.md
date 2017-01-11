@@ -1,4 +1,4 @@
-# Question 2: Cracking WPA-PSK
+# Question 2: Cracking WPA
 
 ## Terminology
 * N6 = Node 6
