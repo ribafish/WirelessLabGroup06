@@ -619,7 +619,9 @@ PTW attack is newer, it uses more correlations between RC4 keystream and key, it
 
 ## d)  What are the advantages and disadvantages of an active attack, compared to a passive attack?
 
-An active attack should be able to be successfull in a shorter time, especially in environments with low traffic, where we have to listen for a long time if we don't actively interact with the system. In an active attack we "provoke" others to send more frames. This is done by sending frames and letting others react to them.  Disadvantage is that if we use our own MAC address (using fake authentication) the access point could log it. If we use MAC spoofing (using another station's MAC address), it will only work as long aas the other station is stil associated.
+An active attack should be able to be successfull in a shorter time, especially in environments with low traffic, where we have to listen for a long time if we don't actively interact with the system. In an active attack we "provoke" others to send more frames. This is done by sending frames and letting others react to them.  Disadvantage is that if we use our own MAC address (using fake authentication) the access point could log it. If we use MAC spoofing (using another station's MAC address), it will only work as long as the other station is stil associated.
+Also an active attack always leaves a trace, whereas a passive attack
+can not be discovered.
 
 ## e) How could the two devices secure their communication, such that it is not possible to decrypt their traffic?
 
