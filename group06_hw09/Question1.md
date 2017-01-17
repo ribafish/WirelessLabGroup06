@@ -36,6 +36,7 @@ for this task we need the already installed tools:
 * iperf
 * iw
 * tcpdump
+* nc
 
 ## c)
 
@@ -183,7 +184,7 @@ PING 172.17.3.115 (172.17.3.115) 56(84) bytes of data.
 
 N15 is reachable from ST.
 
-## d
+## d)
 
 N6 has a monitor capable interface. we called it `wlan1`
 With the wireless configuration above we already configured it.
