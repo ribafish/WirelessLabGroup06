@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 
-set nodesPwd welovetheresa
+set nodesPwd <our password>
 
 set force_conservative 0  ;# set to 1 to force conservative mode even if
                           ;# script wasn't run conservatively originally
