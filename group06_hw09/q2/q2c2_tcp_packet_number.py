@@ -42,7 +42,7 @@ def main(argv):
     #plt.figure(figsize=(25, 15))
 
     fig, ax1 = plt.subplots(figsize=(12, 10))
-    ax1.set_ylabel("TCP Packet sequence number (relative)")
+    ax1.set_ylabel("TCP Packet number of packets")
     x,y = process_tcp_file(files[0])
     tcp1, = ax1.plot(x, y, label="TCP %s @ %s" % scrape_speed_date(files[0]), color='b')
     x,y = process_tcp_file(files[1])
@@ -50,6 +50,7 @@ def main(argv):
     x,y = process_tcp_file(files[2])
     tcp3, = ax1.plot(x, y, label="TCP %s @ %s" % scrape_speed_date(files[2]), color='r')
     ax1.set_xlabel("Delta Time from first packet [s]")
+    ax1.yaxis.get_major_formatter().set_powerlimits((0, 2))
 
     ax2 = ax1.twinx()
     x, y = process_udp_file(files[3])
@@ -64,7 +65,7 @@ def main(argv):
     plt.title("TCP/UDP packet sequence numbers vs. time")
     #plt.grid(True)
     plt.legend(handles=[tcp1, tcp2, tcp3, udp1, udp2, udp3], loc="best")
-    plt.savefig("tcp_udp_seqnums.png")
+    plt.savefig("tcp_udp_packetnums.png")
 
 def get_first_path(paths, tcpudp, speed):
     for path in paths:
@@ -78,7 +79,7 @@ def scrape_speed_date(filepath):
     return speed, date
 
 def process_tcp_file(filepath):
-    tcpdump_call = ("tcpdump -ttttt -r %s ip src 172.17.5.11" % filepath).split(" ")
+    tcpdump_call = ("tcpdump -ttttt -# -r %s ip src 172.17.5.11" % filepath).split(" ")
 
     lines = sub.check_output(tcpdump_call, universal_newlines=True).split('\n')
     if len(lines) == 0:
@@ -91,11 +92,12 @@ def process_tcp_file(filepath):
     for i in range(3, len(lines)-1):    # Jump over the handshake
         try:
             line = lines[i]
-            sline = line.split(" ")
-            ts = line.split(" ")[0].split(":")
+            sline = line.split()
+            ts = line.split()[1].split(":")
             time = float(ts[1])*60 + float(ts[2])
             seqi = sline.index("seq")
             seqnum = int(sline[seqi+1].replace(",", ":").split(":")[0])
+            seqnum = int(sline[0])
             times.append(time)
             if len(seqnums) > 1:
                 dif.append(seqnum-seqnums[-1])
