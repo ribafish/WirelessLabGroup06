@@ -1,0 +1,134 @@
+#!/usr/bin/expect -f
+
+set nodesPwd welovetheresa
+
+set force_conservative 0  ;# set to 1 to force conservative mode even if
+                          ;# script wasn't run conservatively originally
+if {$force_conservative} {
+        set send_slow {1 .1}
+        proc send {ignore arg} {
+                sleep .1
+                exp_send -s -- $arg
+        }
+}
+
+
+set send_slow {10 .001}
+
+
+
+set timeout -1
+set prompt ":~#"
+set wlsPrompt ":~$ "
+set speed [lindex $argv 0]
+set sendSpeed [lindex $argv 1]
+set tcpudp [lindex $argv 2]
+if ([regexp -nocase "tcp" $tcpudp]) { 
+	puts "TCP test\r" 
+	set udp ""
+} elseif ([regexp -nocase "udp" $tcpudp]) {
+	puts "UDP test\r"
+	set udp "-u"
+} else {
+	puts "TCP/UDP selector error"
+}
+puts "speed: $speed Mbps, sending speed: $sendSpeed Mbps\r"
+
+puts "Connecting to SteppingStone\r"
+spawn ssh wls
+set wlsID $spawn_id
+
+puts "Connecting to node 6 for iperf server\r"
+spawn ssh wl1
+set n6iperfID $spawn_id
+expect {
+	"assword:" {
+		send "$nodesPwd\r"
+	}
+	"$prompt" {
+		send "\r"
+	}
+}
+
+puts "Connecting to  node 6 for tcpdump\r"
+spawn ssh wl1
+set n6tcpdumpID $spawn_id
+expect {
+        "assword:" {
+                send "$nodesPwd\r"
+        }
+        "$prompt" {
+                send "\r"
+        }
+}
+
+
+puts "Connecting to node 15 for iperf client\r"
+spawn ssh wl2
+set n15iperfID $spawn_id
+expect {
+        "assword:" {
+                send "$nodesPwd\r"
+        }
+        "$prompt" {
+                send "\r"
+        }
+}
+
+set spawn_id $n6iperfID
+puts "Setting up node 6\r"
+expect "$prompt"
+send -- [format "iw dev wlan0 set bitrates legacy-2.4 %s.0\r" $speed]
+expect "$prompt"
+send "wifi\r"
+expect "$prompt"
+send "\r"
+
+set spawn_id $n15iperfID
+puts "Setting up node 15\r"
+expect "$prompt"
+send -- [format "iw dev wlan0 set bitrates legacy-2.4 %s.0\r" $speed]
+expect "$prompt"
+send "wifi\r"
+expect "$prompt"
+send "\r"
+
+sleep 10
+
+set spawn_id $wlsID
+expect "$wlsPrompt"
+puts "Starting nc server for tcpdump on SteppingStone\r"
+send -- [format "nc -l -p 8080 > \"hw09/q2/trace_%s_%s\mbps_\$(date %s).cap\"\r" $tcpudp $speed "+%s"]
+set spawn_id $n6iperfID
+expect "$prompt"
+puts "Starting iperf server on node 6\r"
+send "iperf -s $udp\r"
+
+sleep 1
+
+set spawn_id $n6tcpdumpID
+expect "$prompt"
+puts "Starting tcpdump on node 6\r"
+send -- [format "tcpdump -i wlan1 -s 104 -w- %s and ip src or dst 172.17.5.10 | nc 172.17.3.1 8080\r" $tcpudp]
+
+set spawn_id $n15iperfID
+expect "$prompt"
+puts "Starting iperf client on node 15\r"
+send -- [format "iperf -c 172.17.5.10 %s -b %s\M -t 60\r" $udp $sendSpeed]
+expect "$prompt"
+
+
+set spawn_id $n6iperfID
+expect ""
+send "^C"
+set spawn_id $n6tcpdumpID
+expect ""
+send "^C"
+set spawn_id $n15iperfID
+expect ""
+send "^C"
+set spawn_id $wlsID
+expect ""
+send "^C"
+
+#interact
