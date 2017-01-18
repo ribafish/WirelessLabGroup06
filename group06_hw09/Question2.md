@@ -89,10 +89,9 @@ N6: `iperf -s -u`
 
 Start tcpdump on monitor interface on STA
 
-N6: `tcpdump -i wlan1 -s 104 -w- <udp/tcp> and ip src or dst 172.17.5.10 | nc 172.17.3.1 8080`
+N6: `tcpdump -i wlan1 -w- <udp/tcp> and ip src or dst 172.17.5.10 | nc 172.17.3.1 8080`
 
 * -i defines the interface to capture
-* -s removes the udp payload to reduce filesize
 * -w- outputs to STDOUT
 * udp/tcp filters only udp packets
 * ip src or dst filters only packets coming or going from host x
@@ -102,14 +101,10 @@ Start sending packets with iperf
 
 N15: 
 
-```
-for i in `seq 10`; do
-	iperf ‐c 172.17.5.10 ‐u ‐b <7/25/56>M ‐t 60
-	sleep 2s
-done
-```
-A loop which performs 10 runs with 60 seconds duration. For the 
-tcp run just omit the -u flag.
+`iperf ‐c 172.17.5.10 ‐u ‐b <7/25/56>M ‐t 60`
+* -u for UDP, for TCP omit this flag
+* -b sets the bandwidth used (saturated channel)
+* -t 60 runs this for 60 seconds
 
 ### Perform runs with these parameters:
 
@@ -119,6 +114,14 @@ tcp run just omit the -u flag.
 *  Transmission rate 6Mbps, tcp
 *  Transmission rate 24Mbps, tcp
 *  Transmission rate 54Mbps, tcp
+
+### Capturing data
+
+We tied all theese commands together using two scripts, first one was using Expect, which we used to automatically connect to nodes and SteppingStone and executes the commands. Second one was just to run the first one with different settings for the 6 different one. The second script was then added to crontab on our personal RaspberryPi server and it ran every 15 minutes. 
+
+* Script 1 (Expect): `hw09.exp`
+* Script 2: `hw09.sh`
+* crontab entry: `*/15 * * * * /home/pi/WirelessLab/hw09/hw09.sh`
 
 ## c)
 
