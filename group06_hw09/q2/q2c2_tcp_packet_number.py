@@ -79,7 +79,7 @@ def scrape_speed_date(filepath):
     return speed, date
 
 def process_tcp_file(filepath):
-    tcpdump_call = ("tcpdump -ttttt -# -r %s ip src 172.17.5.11" % filepath).split(" ")
+    tcpdump_call = ("tcpdump -ttttt -r %s ip src 172.17.5.11" % filepath).split(" ")
 
     lines = sub.check_output(tcpdump_call, universal_newlines=True).split('\n')
     if len(lines) == 0:
@@ -92,23 +92,30 @@ def process_tcp_file(filepath):
     for i in range(3, len(lines)-1):    # Jump over the handshake
         try:
             line = lines[i]
-            sline = line.split()
-            ts = line.split()[1].split(":")
+            sline = line.split(" ")
+            ts = line.split(" ")[0].split(":")
             time = float(ts[1])*60 + float(ts[2])
             seqi = sline.index("seq")
             seqnum = int(sline[seqi+1].replace(",", ":").split(":")[0])
-            seqnum = int(sline[0])
             times.append(time)
-            if len(seqnums) > 1:
-                dif.append(seqnum-seqnums[-1])
             seqnums.append(seqnum)
         except ValueError:
             None
         except:
             raise Exception("Error on TCP line %i: %s" % (i, lines[i]))
 
+    correct_seqs = []
+    correct_seqs.append(0)
+    for i in range(1, len(seqnums)):
+        if seqnums[i] > seqnums[i-1]:
+            correct_seqs.append(correct_seqs[-1]+1)
+            dif.append(1)
+        else:
+            correct_seqs.append(correct_seqs[-1])
+            dif.append(0)
+
     print("Average difference between seqnums of packets: %f" % (sum(dif)/float(len(dif))))
-    return times, seqnums
+    return times, correct_seqs
 
 
 def process_udp_file(filepath):
