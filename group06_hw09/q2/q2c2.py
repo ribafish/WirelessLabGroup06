@@ -62,7 +62,7 @@ def main(argv):
     ax2.yaxis.get_major_formatter().set_powerlimits((0, 2))
 
     plt.title("TCP/UDP packet sequence numbers vs. time")
-    plt.grid(True)
+    #plt.grid(True)
     plt.legend(handles=[tcp1, tcp2, tcp3, udp1, udp2, udp3], loc="best")
     plt.savefig("tcp_udp_seqnums.png")
 
@@ -86,8 +86,9 @@ def process_tcp_file(filepath):
 
     times = []
     seqnums = []
+    dif = []
 
-    for i in range(1, len(lines)-1):
+    for i in range(3, len(lines)-1):    # Jump over the handshake
         try:
             line = lines[i]
             sline = line.split(" ")
@@ -96,12 +97,15 @@ def process_tcp_file(filepath):
             seqi = sline.index("seq")
             seqnum = int(sline[seqi+1].replace(",", ":").split(":")[0])
             times.append(time)
+            if len(seqnums) > 1:
+                dif.append(seqnum-seqnums[-1])
             seqnums.append(seqnum)
         except ValueError:
             None
         except:
             raise Exception("Error on TCP line %i: %s" % (i, lines[i]))
 
+    print("Average difference between seqnums of packets: %f" % (sum(dif)/float(len(dif))))
     return times, seqnums
 
 
@@ -116,6 +120,7 @@ def process_udp_file(filepath):
 
     times = []
     seqnums = []
+    dif = []
 
     for i in range(1, len(lines)-1):
         try:
@@ -124,13 +129,15 @@ def process_udp_file(filepath):
             seqstr = data[0]+data[1]+data[2]+data[3]
             seqnum = int(seqstr, 16)
             times.append(time)
+            if len(seqnums) > 1:
+                dif.append(seqnum - seqnums[-1])
             seqnums.append(seqnum)
         except:
             # raise Exception("Error on UDP line %i: %s" % (i, lines[i]))
             print("Error on UDP line %i: %s" % (i, lines[i]))
             None
 
-
+    print("Average difference between seqnums of packets: %f" % (sum(dif)/float(len(dif))))
     return times, seqnums
 
 
