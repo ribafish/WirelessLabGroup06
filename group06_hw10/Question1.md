@@ -39,10 +39,10 @@ Yes, TCP throughput consistently was lower than UDP (except for 6Mbps, where thi
 
 ![](q1/udp_packet_lengths.png)
 
-Explanation:
+#### Explanation:
 
 
-References:
+#### References:
 
 * [StackOverflow](http://stackoverflow.com/questions/14993000/the-most-reliable-and-efficient-udp-packet-size)
 
@@ -70,7 +70,8 @@ References:
 
 
 #### Our test results:
+
 ![](q1/tcp_algos.png) 
 
-Explanation:
+#### Explanation:
 
