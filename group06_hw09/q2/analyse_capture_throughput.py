@@ -95,7 +95,7 @@ def get_tshark_throughput_in_mbps(file_path, proto):
   duration_in_s = float(stats_line[-1])
 
   ## return throughput
-  return ((transmitted_bytes - overhead )/ duration_in_s) / 1000 / 1000
+  return ((transmitted_bytes - overhead )/ duration_in_s) / 1000 / 1000 * 8
 
 def trace_filename_to_meta(filename):
   splits = filename.split(".")[0].split("_")
