@@ -10,7 +10,7 @@ For questions 1 - 3 we used the data from last assignmnet, as stated on [ISIS](h
 
 For questions 4 - 6 we generated new data, using new instructions posted on ISIS: [UDP packet size](https://isis.tu-berlin.de/mod/forum/discuss.php?d=124736), [TCP Reno/Cubic](https://isis.tu-berlin.de/mod/forum/discuss.php?d=124738)
  
-We started with the data gathering on Tue, 24 Jan 2017 12:23:30 GMT and ended on Tue, 24 Jan 2017 21:40:46 GMT.
+We started with the data gathering on Tue, 24 Jan 2017 12:23:30 GMT and ended on Tue, 24 Jan 2017 21:40:46 GMT. We used a script (mostly the same as in last homework) which did a test run every 15 minutes (7 UDP packet sizes, 2 TCP congestion protocols).
 
 ### 1. What is the measured TCP throughput in infrastructure mode from station to access point? Compare this throughput with the physical data rate of 54 Mbps that the hardware is configured with. Can you explain the difference (generic, no calculations needed)?
 
@@ -18,9 +18,7 @@ Graph with results from the last assignment (assignment 9):
 
 ![](q1/c1_from_hw09_corrected.png) 
 
-
-
-
+The difference comes from the fact that the physical data rate of 54Mbps includes all of the traffic, including all headers on each packets (IP header, TCP header, MAC header), all control and management packets (ACKs, etc.). Even if we calculated the throughput of all of bits sent/received, it would still be lower because of lost and retransmitted packets and all the different windows, delays and backoffs of underalying protocols.
 
 ### 2. Is the TCP throughput lower compared to the UDP throughput? If yes, why?
 
