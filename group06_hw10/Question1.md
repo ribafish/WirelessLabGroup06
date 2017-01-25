@@ -28,7 +28,14 @@ Yes, TCP throughput consistently was lower than UDP (except for 6Mbps, where thi
 
 ### 3. What is (are) the limiting factor(s) in the TCP protocol?
 
+The core principles and their implications in TCP protocol:
 
+* TCP three-way handshake introduces a full roundtrip of latency.
+* TCP slow-start is applied to every new connection.
+* TCP flow and congestion control regulate throughput of all connections.
+* TCP throughput is regulated by current congestion window size.
+
+As a result, the rate with which a TCP connection can transfer data in modern high-speed networks is often limited by the roundtrip time between the receiver and sender. Further, while bandwidth continues to increase, latency is bounded by the speed of light and is already within a small constant factor of its maximum value. In most cases, latency, not bandwidth, is the bottleneck for TCP.
 
 ### 4. What is the optimum packet size (accuracy 1 byte) and the corresponding data rate for maximum UDP throughput?
 
