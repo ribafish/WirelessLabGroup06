@@ -41,6 +41,8 @@ As a result, the rate with which a TCP connection can transfer data in modern hi
 
 For this (and next question) we went with UDP throughput with variable packet size (option `b)` on [ISIS](https://isis.tu-berlin.de/mod/forum/discuss.php?d=124736#p248190)), as this was something we haven't done before and were interested in the results.
 
+We still use 54Mbps as the transmission rate on both nodes.
+
 ##### Access point: `iperf -s -u`
 
 * `-u`: use UDP instead of TCP
